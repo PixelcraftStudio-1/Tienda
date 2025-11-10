@@ -24,13 +24,13 @@ header {
   top:0;
   z-index:100;
 }
-header h1 { cursor:pointer; font-size:24px; }
+header h1 { cursor:pointer; font-size:26px; font-weight:700; }
 nav ul { list-style:none; display:flex; gap:25px; }
 nav ul li a {
   text-decoration:none;
   color:#fff;
   font-weight:500;
-  padding:8px 12px;
+  padding:10px 15px;
   transition:all 0.3s ease;
 }
 nav ul li a:hover {
@@ -39,30 +39,47 @@ nav ul li a:hover {
   border-radius:5px;
 }
 
-/* Sección principal */
-main { margin-top:100px; padding:50px; }
+/* Banner de bienvenida */
+.banner {
+  margin-top:100px;
+  padding:60px 20px;
+  text-align:center;
+  background-color:#f5f5f5;
+}
+.banner h2 { font-size:40px; margin-bottom:20px; }
+.banner p { font-size:18px; line-height:1.6; }
 
-/* Título */
-main h2 { font-size:36px; margin-bottom:30px; text-align:center; }
+/* Sección de productos / tienda */
+.tienda-section {
+  padding:50px 20px;
+  max-width:1200px;
+  margin:0 auto;
+}
+.tienda-section h2 {
+  text-align:center;
+  font-size:36px;
+  margin-bottom:40px;
+}
 
-/* Contenedor de productos */
+/* Grid de productos */
 .products {
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
   gap:30px;
 }
 
-/* Tarjeta de producto */
+/* Tarjetas de producto */
 .product-card {
   border:2px solid #111;
   border-radius:8px;
   overflow:hidden;
   text-align:center;
+  background-color:#fff;
   transition:all 0.3s ease;
 }
 .product-card:hover {
   transform:translateY(-5px);
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 .product-card img {
   width:100%;
@@ -72,16 +89,17 @@ main h2 { font-size:36px; margin-bottom:30px; text-align:center; }
 .product-card h3 {
   margin:15px 0 5px 0;
   font-size:20px;
+  font-weight:600;
 }
 .product-card p {
   margin-bottom:15px;
   font-size:18px;
-  font-weight:600;
+  font-weight:500;
 }
 
 /* Botón comprar */
 .product-card button {
-  padding:10px 20px;
+  padding:12px 20px;
   border:2px solid #111;
   background-color:#fff;
   color:#111;
@@ -93,6 +111,14 @@ main h2 { font-size:36px; margin-bottom:30px; text-align:center; }
 .product-card button:hover {
   background-color:#111;
   color:#fff;
+}
+
+/* Tebex embed */
+.tienda-embed {
+  margin-top:50px;
+  width:100%;
+  height:800px;
+  border:none;
 }
 
 /* Footer */
@@ -118,8 +144,13 @@ footer {
   </nav>
 </header>
 
-<main>
-  <h2>Nuestros Productos</h2>
+<section class="banner">
+  <h2>Bienvenido a Pixelcraft Studio</h2>
+  <p>Compra rangos, paquetes y recursos exclusivos para Minecraft. ¡Todo en un solo lugar con estilo Mineboom!</p>
+</section>
+
+<section class="tienda-section">
+  <h2>Productos Destacados</h2>
   <div class="products">
     <div class="product-card">
       <img src="https://via.placeholder.com/300x200.png?text=Producto+1" alt="Producto 1">
@@ -139,14 +170,14 @@ footer {
       <p>$10.00</p>
       <button>Comprar</button>
     </div>
-    <div class="product-card">
-      <img src="https://via.placeholder.com/300x200.png?text=Producto+4" alt="Producto 4">
-      <h3>Producto 4</h3>
-      <p>$12.00</p>
-      <button>Comprar</button>
-    </div>
   </div>
-</main>
+</section>
+
+<!-- Sección Tebex para tienda real -->
+<section class="tienda-section">
+  <h2>Tienda Oficial</h2>
+  <iframe class="tienda-embed" src="https://tu-tienda.tebex.io"></iframe>
+</section>
 
 <footer>
   &copy; 2025 Pixelcraft Studio - Todos los derechos reservados
