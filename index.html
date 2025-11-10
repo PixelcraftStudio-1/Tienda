@@ -57,7 +57,167 @@ body { background-color:#000; color:#fff; }
 /* CONTENIDO PRINCIPAL */
 .main { background-color:#111; padding:25px; border-radius:10px; }
 
-/* CATEGORÍAS MODAL */
+/* PAQUETES DESTACADOS */
+.featured {
+  background-color:#1a1a1a;
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:25px;
+}
+.featured h2 {
+  font-size:18px;
+  margin-bottom:15px;
+  font-weight:700;
+}
+.packages {
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+}
+.package {
+  background-color:#fff;
+  color:#000;
+  border-radius:8px;
+  flex:1;
+  min-width:250px;
+  padding:15px;
+  text-align:center;
+  transition:all 0.3s ease;
+}
+.package:hover {
+  transform:translateY(-5px);
+  box-shadow:0 4px 15px rgba(255,255,255,0.1);
+}
+.package img {
+  width:80px;
+  height:80px;
+  margin-bottom:10px;
+}
+.package h3 {
+  font-size:16px;
+  margin-bottom:5px;
+}
+.package p {
+  font-weight:600;
+  font-size:14px;
+}
+
+/* META MENSUAL */
+.goal {
+  background-color:#1a1a1a;
+  padding:15px;
+  border-radius:8px;
+  margin-bottom:25px;
+}
+.goal h3 {
+  font-size:16px;
+  margin-bottom:10px;
+}
+.progress {
+  background-color:#333;
+  border-radius:5px;
+  overflow:hidden;
+  height:18px;
+}
+.progress-bar {
+  background-color:#fff;
+  width:100%;
+  height:100%;
+}
+
+/* INFORMACIÓN */
+.info-section {
+  background-color:#1a1a1a;
+  border-radius:8px;
+  padding:20px;
+  margin-bottom:25px;
+}
+.info-section h2 {
+  font-size:18px;
+  margin-bottom:10px;
+}
+.info-section p {
+  font-size:14px;
+  color:#ccc;
+  line-height:1.6;
+}
+
+/* MÉTODOS DE PAGO */
+.payment-methods {
+  background-color:#1a1a1a;
+  border-radius:8px;
+  padding:20px;
+  margin-bottom:25px;
+}
+.payment-methods h3 {
+  font-size:16px;
+  margin-bottom:15px;
+}
+.payment-logos {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.payment-logos img {
+  width:60px;
+  height:30px;
+  object-fit:contain;
+  filter:grayscale(100%);
+  border-radius:4px;
+  background-color:#fff;
+  padding:3px;
+}
+
+/* POLÍTICA */
+.policy {
+  background-color:#1a1a1a;
+  border-radius:8px;
+  padding:20px;
+}
+.policy h3 {
+  font-size:16px;
+  margin-bottom:10px;
+}
+.policy p {
+  font-size:13px;
+  color:#ccc;
+  margin-bottom:10px;
+  line-height:1.5;
+}
+
+/* BOTONES */
+.buttons {
+  margin-top:15px;
+}
+.buttons button {
+  background-color:#000;
+  color:#fff;
+  border:2px solid #fff;
+  padding:10px 20px;
+  margin-right:10px;
+  border-radius:5px;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  font-weight:600;
+}
+.buttons button:hover {
+  background-color:#fff;
+  color:#000;
+}
+
+/* FOOTER */
+footer {
+  text-align:center;
+  padding:20px;
+  border-top:1px solid #333;
+  margin-top:30px;
+  font-size:13px;
+  color:#aaa;
+}
+footer a { color:#fff; text-decoration:none; }
+footer a:hover { text-decoration:underline; }
+
+/* MODAL CATEGORÍAS */
 .category-modal {
   display:none;
   position:fixed;
@@ -117,19 +277,21 @@ body { background-color:#000; color:#fff; }
 }
 .close-category:hover { background:#f00; transform:scale(1.1); }
 
-/* ANIMACIÓN */
 @keyframes pop {
   from { transform:scale(0.8); opacity:0; }
   to { transform:scale(1); opacity:1; }
 }
 
-/* Responsive */
-@media(max-width:900px){ .wrapper{ grid-template-columns:1fr; } }
+/* RESPONSIVE */
+@media(max-width:900px){
+  .wrapper{ grid-template-columns:1fr; }
+}
 </style>
 </head>
 <body>
 
 <div class="wrapper">
+  <!-- PANEL LATERAL -->
   <aside class="sidebar">
     <h2 onclick="openCategoryModal()">Selecciona una categoría</h2>
     <div class="info">
@@ -146,11 +308,68 @@ body { background-color:#000; color:#fff; }
     </div>
   </aside>
 
+  <!-- CONTENIDO PRINCIPAL -->
   <main class="main">
-    <h1>Bienvenido a la tienda oficial de Pixelcraft Studio</h1>
-    <p>Selecciona una categoría para ver los paquetes disponibles.</p>
+    <section class="featured">
+      <h2>Paquetes Destacados</h2>
+      <div class="packages">
+        <div class="package">
+          <img src="https://via.placeholder.com/80" alt="">
+          <h3>Multiplicador 10x</h3>
+          <p><del>$9.99</del> <strong>$2.99 USD</strong></p>
+        </div>
+        <div class="package">
+          <img src="https://via.placeholder.com/80" alt="">
+          <h3>KaBoom</h3>
+          <p><del>$29.99</del> <strong>$19.99 USD</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="goal">
+      <h3>Meta Mensual</h3>
+      <div class="progress">
+        <div class="progress-bar"></div>
+      </div>
+    </section>
+
+    <section class="info-section">
+      <h2>Bienvenido a la Tienda Oficial</h2>
+      <p>Bienvenido a la tienda de Pixelcraft Studio.  
+      Aquí podrás adquirir rangos, paquetes y beneficios para nuestro servidor.  
+      Todos los artículos son permanentes y globales.</p>
+    </section>
+
+    <section class="payment-methods">
+      <h3>Métodos de Pago Disponibles</h3>
+      <div class="payment-logos">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/MasterCard_Logo.svg" alt="MasterCard">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/PayPal_Logo.svg" alt="PayPal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Google_Pay_Logo.svg" alt="GPay">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Apple_Pay_logo.svg" alt="Apple Pay">
+      </div>
+    </section>
+
+    <section class="policy">
+      <h3>Política de Reembolso</h3>
+      <p>Todos los pagos son finales y no reembolsables.  
+      Intentar revertir un pago podría conllevar sanciones en el servidor.  
+      El tiempo de entrega puede tardar entre 5 y 20 minutos.</p>
+
+      <div class="buttons">
+        <button>Términos y Condiciones</button>
+        <button>Imprenta</button>
+        <button>Política de Privacidad</button>
+      </div>
+    </section>
   </main>
 </div>
+
+<footer>
+  &copy; 2025 Pixelcraft Studio — Todos los derechos reservados.<br>
+  No estamos afiliados con Mojang AB.
+</footer>
 
 <!-- MODAL DE CATEGORÍAS -->
 <div class="category-modal" id="categoryModal">
