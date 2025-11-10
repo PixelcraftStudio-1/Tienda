@@ -1,51 +1,156 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tienda Minecraft B/N</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixelcraft Tienda</title>
+<style>
+/* Reset básico */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+
+/* Body y fondo */
+body { background-color:#fff; color:#111; }
+
+/* Header / Menú fijo */
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 50px;
+  background-color:#111;
+  color:#fff;
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:100;
+}
+header h1 { cursor:pointer; font-size:24px; }
+nav ul { list-style:none; display:flex; gap:25px; }
+nav ul li a {
+  text-decoration:none;
+  color:#fff;
+  font-weight:500;
+  padding:8px 12px;
+  transition:all 0.3s ease;
+}
+nav ul li a:hover {
+  color:#111;
+  background-color:#fff;
+  border-radius:5px;
+}
+
+/* Sección principal */
+main { margin-top:100px; padding:50px; }
+
+/* Título */
+main h2 { font-size:36px; margin-bottom:30px; text-align:center; }
+
+/* Contenedor de productos */
+.products {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+  gap:30px;
+}
+
+/* Tarjeta de producto */
+.product-card {
+  border:2px solid #111;
+  border-radius:8px;
+  overflow:hidden;
+  text-align:center;
+  transition:all 0.3s ease;
+}
+.product-card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+.product-card img {
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+.product-card h3 {
+  margin:15px 0 5px 0;
+  font-size:20px;
+}
+.product-card p {
+  margin-bottom:15px;
+  font-size:18px;
+  font-weight:600;
+}
+
+/* Botón comprar */
+.product-card button {
+  padding:10px 20px;
+  border:2px solid #111;
+  background-color:#fff;
+  color:#111;
+  cursor:pointer;
+  font-weight:600;
+  border-radius:5px;
+  transition:all 0.3s ease;
+}
+.product-card button:hover {
+  background-color:#111;
+  color:#fff;
+}
+
+/* Footer */
+footer {
+  margin-top:50px;
+  padding:20px;
+  text-align:center;
+  border-top:2px solid #111;
+  font-size:14px;
+}
+</style>
 </head>
 <body>
 
 <header>
-  <h1>Tienda Minecraft</h1>
+  <h1>Pixelcraft Studio</h1>
+  <nav>
+    <ul>
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#">Tienda</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+  </nav>
 </header>
 
-<nav class="menu">
-  <ul>
-    <li class="dropdown"><a href="#">Kaboom+</a></li>
+<main>
+  <h2>Nuestros Productos</h2>
+  <div class="products">
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x200.png?text=Producto+1" alt="Producto 1">
+      <h3>Producto 1</h3>
+      <p>$5.00</p>
+      <button>Comprar</button>
+    </div>
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x200.png?text=Producto+2" alt="Producto 2">
+      <h3>Producto 2</h3>
+      <p>$7.50</p>
+      <button>Comprar</button>
+    </div>
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x200.png?text=Producto+3" alt="Producto 3">
+      <h3>Producto 3</h3>
+      <p>$10.00</p>
+      <button>Comprar</button>
+    </div>
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x200.png?text=Producto+4" alt="Producto 4">
+      <h3>Producto 4</h3>
+      <p>$12.00</p>
+      <button>Comprar</button>
+    </div>
+  </div>
+</main>
 
-    <li class="dropdown">
-      <a href="#">World Box</a>
-      <ul class="submenu">
-        <li><a href="#">Rangos</a></li>
-        <li><a href="#">Mejora de Rango</a></li>
-        <li><a href="#">Kits</a></li>
-        <li><a href="#">Llaves</a></li>
-        <li><a href="#">Premium</a></li>
-        <li><a href="#">Exclusivo</a></li>
-      </ul>
-    </li>
+<footer>
+  &copy; 2025 Pixelcraft Studio - Todos los derechos reservados
+</footer>
 
-    <li class="dropdown">
-      <a href="#">Gens</a>
-      <ul class="submenu">
-        <li><a href="#">Rangos</a></li>
-        <li><a href="#">Mejora de Rango</a></li>
-        <li><a href="#">Llaves</a></li>
-        <li><a href="#">Multiplicador</a></li>
-        <li><a href="#">Kits Premium</a></li>
-        <li><a href="#">S-Kits</a></li>
-        <li><a href="#">Exclusivo</a></li>
-        <li><a href="#">Kits</a></li>
-      </ul>
-    </li>
-
-    <li class="dropdown"><a href="#">Otros</a></li>
-  </ul>
-</nav>
-
-<script src="js/menu.js"></script>
 </body>
 </html>
