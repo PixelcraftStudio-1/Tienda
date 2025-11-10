@@ -1,401 +1,272 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Logicraft Tienda</title>
 <style>
-  /* ---------- RESET & BASE ---------- */
-  *{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',sans-serif}
-  :root{
-    --bg:#050506;
-    --panel:#0f0f10;
-    --muted:#bdbdbd;
-    --accent:#ffffff;
-    --soft:#1a1a1a;
-    --glass: rgba(255,255,255,0.04);
-    --radius:14px;
-  }
-  html,body{height:100%;background:var(--bg);color:var(--accent);-webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-
-  /* ---------- LAYOUT ---------- */
-  .page {
-    max-width:1300px;
-    margin:28px auto;
-    padding:20px;
-    display:grid;
-    grid-template-columns:320px 1fr;
-    gap:20px;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
   }
 
-  /* ---------- SIDEBAR ---------- */
-  .sidebar{
-    background:linear-gradient(180deg,var(--panel),#0b0b0b);
-    border-radius:var(--radius);
-    padding:18px;
-    box-shadow:0 8px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
-    border:1px solid rgba(255,255,255,0.03);
+  body {
+    background: #0a0a0a;
+    color: #fff;
   }
-  .brand{
-    display:flex;align-items:center;gap:12px;margin-bottom:16px;
-  }
-  .logo {
-    width:48px;height:48px;border-radius:10px;background:linear-gradient(180deg,#fff,#ddd);
-    display:flex;align-items:center;justify-content:center;color:#000;font-weight:700;
-  }
-  .brand h1{font-size:18px;letter-spacing:0.6px}
-  .side-block{
-    background:var(--soft);
-    border-radius:10px;padding:12px;margin-bottom:14px;border:1px solid rgba(255,255,255,0.03)
-  }
-  .side-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-  .side-title h3{font-size:13px}
-  .select-cat{
-    display:block;width:100%;padding:10px;border-radius:10px;background:linear-gradient(180deg,#151515,#0e0e0e);
-    border:1px solid rgba(255,255,255,0.04);color:var(--accent);font-weight:600;cursor:pointer;
-    transition:transform .12s ease,background .12s;
-  }
-  .select-cat:hover{transform:translateY(-3px)}
 
-  .recent-payments{display:flex;flex-wrap:wrap;gap:8px}
-  .recent-payments img{width:40px;height:28px;border-radius:6px;object-fit:contain;background:#fff;padding:3px;filter:grayscale(100%)}
-
-  /* ---------- MAIN ---------- */
-  .main {
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:var(--radius);
-    padding:22px;
-    border:1px solid rgba(255,255,255,0.03);
-    box-shadow:0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  header {
+    background: #111;
+    padding: 20px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    border-bottom: 2px solid #333;
+    letter-spacing: 1px;
   }
-  .hero {display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:20px}
-  .hero .title{font-size:22px;font-weight:700}
-  .hero .subtitle{color:var(--muted);font-size:13px}
 
-  /* ---------- PRODUCTS GRID ---------- */
-  .products-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-    gap:18px;
+  .container {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    gap: 20px;
   }
-  .card{
-    background:linear-gradient(180deg,#0f0f10,var(--soft));
-    border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);
-    transition:transform .18s ease,box-shadow .18s ease;
-    cursor:pointer;overflow:hidden;
-  }
-  .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.7)}
-  .card .thumb{
-    width:100%;height:140px;border-radius:8px;object-fit:cover;margin-bottom:10px;background:#ddd;
-  }
-  .card h4{font-size:15px;margin-bottom:6px}
-  .card .price{font-weight:700;color:var(--accent)}
-  .card .meta{font-size:12px;color:var(--muted);margin-bottom:8px}
 
-  .card .actions{display:flex;gap:8px;margin-top:8px}
-  .btn{
-    flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);
-    background:transparent;color:var(--accent);font-weight:700;cursor:pointer;transition:all .12s;
+  .sidebar {
+    width: 280px;
+    background: #111;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
-  .btn.buy{background:var(--accent);color:#000;border:none}
-  .btn:hover{transform:translateY(-3px)}
-  .btn.buy:hover{opacity:0.95}
 
-  /* ---------- PROGRESS / META ---------- */
-  .meta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px}
-  .meta-card{flex:1;min-width:220px;background:var(--soft);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
-  .prog{height:12px;background:#111;border-radius:8px;overflow:hidden}
-  .prog > i{display:block;height:100%;background:linear-gradient(90deg,#fff,#ddd);width:0%;transition:width 1s ease}
-
-  /* ---------- PAYMENT LOGOS ---------- */
-  .payments{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-  .payments img{width:80px;height:30px;object-fit:contain;background:#fff;padding:4px;border-radius:6px;filter:grayscale(100%)}
-
-  /* ---------- FOOTER ---------- */
-  footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
-
-  /* ---------- MODALS ---------- */
-  .modal-backdrop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:999}
-  .modal-panel{
-    width:560px;max-width:94%;background:linear-gradient(180deg,#0f0f10,#141414);
-    border-radius:16px;padding:20px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 20px 60px rgba(0,0,0,0.7);
-    transform:translateY(10px);opacity:0;transition:all .18s ease;
+  .sidebar button {
+    background: #1a1a1a;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
   }
-  .modal-backdrop.show .modal-panel{transform:translateY(0);opacity:1}
-  .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-  .modal-header h3{font-size:16px}
-  .close{
-    background:#ff4d4d;border:none;color:#000;padding:6px 10px;border-radius:10px;font-weight:700;cursor:pointer
-  }
-  .cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-  .cat-btn{
-    padding:12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);
-    cursor:pointer;font-weight:700;transition:transform .12s,background .12s;
-  }
-  .cat-btn:hover{transform:translateY(-4px);background:#fff;color:#000}
 
-  /* small screens */
-  @media (max-width:900px){
-    .page{grid-template-columns:1fr; padding:12px}
-    .sidebar{order:2}
-    .main{order:1}
+  .sidebar button:hover {
+    background: #fff;
+    color: #000;
+    transform: scale(1.03);
+  }
+
+  .content {
+    flex: 1;
+    background: #111;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  }
+
+  .policy {
+    background: #111;
+    margin: 40px auto;
+    width: 90%;
+    max-width: 900px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #ccc;
+  }
+
+  footer {
+    background: #111;
+    text-align: center;
+    padding: 20px;
+    border-top: 2px solid #333;
+    font-size: 14px;
+  }
+
+  footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  footer a:hover {
+    color: #aaa;
+  }
+
+  /* MODAL */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background: #111;
+    padding: 25px;
+    border-radius: 15px;
+    border: 2px solid #fff;
+    width: 500px;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+  }
+
+  .modal-content h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .category-grid button {
+    background: #1a1a1a;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 500;
+  }
+
+  .category-grid button:hover {
+    background: #fff;
+    color: #000;
+    transform: scale(1.05);
+  }
+
+  .close-btn {
+    background: #f00;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    float: right;
+    padding: 6px 10px;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+
+  .close-btn:hover {
+    background: #c00;
+  }
+
+  /* DISCORD BUTTON */
+  .discord-box {
+    text-align: center;
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #fff;
+  }
+
+  .discord-box p {
+    margin-bottom: 10px;
+    color: #ddd;
+    font-size: 15px;
+  }
+
+  .discord-btn {
+    background: #5865F2;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .discord-btn:hover {
+    background: #4752C4;
   }
 </style>
 </head>
 <body>
 
-<!-- PAGE -->
-<div class="page" role="main">
-  <!-- SIDEBAR -->
-  <aside class="sidebar" aria-label="Panel lateral">
-    <div class="brand">
-      <div class="logo">L</div>
-      <div>
-        <h1>Logicraft Tienda</h1>
-        <div style="font-size:12px;color:var(--muted)">Comprar ▪ Rangos ▪ Paquetes</div>
-      </div>
+<header>LOGICRAFT TIENDA</header>
+
+<div class="container">
+  <div class="sidebar">
+    <button id="openModal">Selecciona una categoría</button>
+
+    <div class="discord-box">
+      <p>¿Necesitas ayuda?</p>
+      <button class="discord-btn" onclick="window.open('https://discord.gg/Rz5rj4YvZn','_blank')">Unirse al Discord</button>
     </div>
+  </div>
 
-    <div class="side-block">
-      <div class="side-title">
-        <h3>Categorías</h3>
-        <button class="select-cat" id="openCategories">Selecciona una categoría ▾</button>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-        <!-- quick filters -->
-        <button class="select-cat" data-cat="all" onclick="filterBy('all')">Ver todo</button>
-        <button class="select-cat" data-cat="featured" onclick="filterBy('featured')">Destacados</button>
-      </div>
-    </div>
-
-    <div class="side-block">
-      <div class="side-title"><h3>Pagos recientes</h3></div>
-      <div class="recent-payments" aria-hidden="false">
-        <img src="https://via.placeholder.com/80x30?text=VISA" alt="Visa">
-        <img src="https://via.placeholder.com/80x30?text=MC" alt="Mastercard">
-        <img src="https://via.placeholder.com/80x30?text=PP" alt="Paypal">
-        <img src="https://via.placeholder.com/80x30?text=GPay" alt="GPay">
-      </div>
-    </div>
-
-    <div class="side-block" style="text-align:center">
-      <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Soporte</div>
-      <div style="font-weight:700">soporte@logicraft.io</div>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="main" aria-live="polite">
-    <div class="hero">
-      <div>
-        <div class="title">Tienda Oficial — Logicraft</div>
-        <div class="subtitle">Rangos, paquetes y beneficios para nuestros servidores. Integración Tebex lista.</div>
-      </div>
-      <div style="display:flex;gap:10px;align-items:center">
-        <button class="btn" onclick="openTerms()">Términos</button>
-        <button class="btn" onclick="openPrivacy()">Privacidad</button>
-        <button class="btn buy" onclick="openTebex()">Ir a la tienda</button>
-      </div>
-    </div>
-
-    <!-- PRODUCTS -->
-    <section>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-        <h3 style="font-size:16px">Productos destacados</h3>
-        <div style="color:var(--muted);font-size:13px">Mostrando <span id="count">4</span> productos</div>
-      </div>
-
-      <div class="products-grid" id="products">
-        <!-- product cards (data-category) -->
-        <article class="card" data-cat="featured kaboom">
-          <img class="thumb" src="https://via.placeholder.com/600x360?text=Kaboom+" alt="Kaboom+">
-          <h4>Kaboom+ Rank</h4>
-          <div class="meta">Entrega: Inmediata • Permanente</div>
-          <div class="price">$4.99</div>
-          <div class="actions">
-            <button class="btn" onclick="viewProduct('Kaboom+ Rank')">Ver</button>
-            <button class="btn buy" onclick="addToCart('Kaboom+ Rank',4.99)">Comprar</button>
-          </div>
-        </article>
-
-        <article class="card" data-cat="featured worldbox">
-          <img class="thumb" src="https://via.placeholder.com/600x360?text=World+Box" alt="World Box">
-          <h4>World Box Pack</h4>
-          <div class="meta">Contenido: Items exclusivos</div>
-          <div class="price">$9.99</div>
-          <div class="actions">
-            <button class="btn" onclick="viewProduct('World Box Pack')">Ver</button>
-            <button class="btn buy" onclick="addToCart('World Box Pack',9.99)">Comprar</button>
-          </div>
-        </article>
-
-        <article class="card" data-cat="featured gens">
-          <img class="thumb" src="https://via.placeholder.com/600x360?text=Gens" alt="Gens">
-          <h4>Gens Bundle</h4>
-          <div class="meta">Rango + Kits</div>
-          <div class="price">$7.50</div>
-          <div class="actions">
-            <button class="btn" onclick="viewProduct('Gens Bundle')">Ver</button>
-            <button class="btn buy" onclick="addToCart('Gens Bundle',7.5)">Comprar</button>
-          </div>
-        </article>
-
-        <article class="card" data-cat="bomppv worldbox">
-          <img class="thumb" src="https://via.placeholder.com/600x360?text=BoomPvP" alt="BoomPvP">
-          <h4>BoomPvP Pack</h4>
-          <div class="meta">Incluye: Kits y cosméticos</div>
-          <div class="price">$12.00</div>
-          <div class="actions">
-            <button class="btn" onclick="viewProduct('BoomPvP Pack')">Ver</button>
-            <button class="btn buy" onclick="addToCart('BoomPvP Pack',12)">Comprar</button>
-          </div>
-        </article>
-      </div>
-
-      <div class="meta-row" style="margin-top:18px">
-        <div class="meta-card">
-          <div style="font-size:13px;color:var(--muted)">Meta mensual</div>
-          <div style="font-weight:700;margin:8px 0">Objetivo: $500</div>
-          <div class="prog"><i id="progressBar" style="width:62%"></i></div>
-        </div>
-
-        <div class="meta-card">
-          <div style="font-size:13px;color:var(--muted)">Métodos de pago</div>
-          <div class="payments" style="margin-top:8px">
-            <img src="https://via.placeholder.com/100x40?text=VISA" alt="Visa">
-            <img src="https://via.placeholder.com/100x40?text=MC" alt="Mastercard">
-            <img src="https://via.placeholder.com/100x40?text=PP" alt="Paypal">
-          </div>
-        </div>
-
-        <div class="meta-card">
-          <div style="font-size:13px;color:var(--muted)">Información</div>
-          <div style="margin-top:8px;color:var(--muted);font-size:13px">Todos los pagos son finales. Entregas automáticas por Tebex.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- placeholder for Tebex iframe -->
-    <section style="margin-top:18px">
-      <h3 style="font-size:16px;margin-bottom:10px">Tienda Oficial</h3>
-      <!-- Reemplaza el src por tu tienda Tebex: https://<tu-tienda>.tebex.io -->
-      <div style="background:var(--glass);border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03)">
-        <iframe id="tebexFrame" src="about:blank" style="width:100%;height:520px;border-radius:10px;border:none;display:block;background:#000"></iframe>
-        <div style="color:var(--muted);font-size:13px;margin-top:8px">Inserta tu URL Tebex con <code>openTebex()</code> o edita el atributo <code>src</code>.</div>
-      </div>
-    </section>
-  </main>
-</div>
-
-<footer>© 2025 Logicraft Tienda — No afiliado a Mojang AB</footer>
-
-<!-- ---------- MODAL: CATEGORÍAS ---------- -->
-<div class="modal-backdrop" id="catModal" aria-hidden="true">
-  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="catTitle">
-    <div class="modal-header">
-      <h3 id="catTitle">Selecciona una categoría</h3>
-      <button class="close" id="closeCat">X</button>
-    </div>
-    <div class="cat-grid">
-      <button class="cat-btn" data-cat="kaboom" onclick="pickCategory('kaboom')">Kaboom+</button>
-      <button class="cat-btn" data-cat="worldbox" onclick="pickCategory('worldbox')">World Box</button>
-      <button class="cat-btn" data-cat="gens" onclick="pickCategory('gens')">Gens</button>
-      <button class="cat-btn" data-cat="earth" onclick="pickCategory('earth')">Earth</button>
-      <button class="cat-btn" data-cat="mario" onclick="pickCategory('mario')">Mario Box</button>
-      <button class="cat-btn" data-cat="fnaf" onclick="pickCategory('fnaf')">FNAF Box</button>
-      <button class="cat-btn" data-cat="boxini" onclick="pickCategory('boxini')">BoxiniPvP</button>
-      <button class="cat-btn" data-cat="boom" onclick="pickCategory('boom')">BoomPvP</button>
-      <button class="cat-btn" data-cat="others" onclick="pickCategory('others')">Otros</button>
-    </div>
+  <div class="content">
+    <h2>Bienvenido a la Tienda de Logicraft</h2>
+    <p>Aquí podrás comprar rangos, cosméticos y otros paquetes exclusivos para el servidor.</p>
   </div>
 </div>
 
-<!-- ---------- MODAL: PRODUCT / TERMS (simple) ---------- -->
-<div class="modal-backdrop" id="termsModal" aria-hidden="true" style="display:none">
-  <div class="modal-panel">
-    <div class="modal-header">
-      <h3 id="termsTitle">Términos y Condiciones</h3>
-      <button class="close" onclick="closeTerms()">X</button>
-    </div>
-    <div style="color:var(--muted);font-size:14px;line-height:1.5">
-      <p>Al comprar aceptas los términos de Logicraft. Los pagos son finales. Entrega automática mediante Tebex.</p>
+<div class="policy">
+  <h3>Política de Reembolso</h3>
+  <p>Todos los pagos son finales y no son reembolsables. El intento de reembolsar un pago, tendrá como consecuencia una prohibición permanente e irreversible de nuestro servidor, y en las diversas tiendas existentes de servidores.</p>
+  <p>El tiempo de espera para recibir un paquete, puede tomar de 5-20 minutos. En caso de superar este tiempo de espera, abre un ticket en nuestro servidor de discord con pruebas de tu compra. Así te podremos ayudar a resolver tu problema.</p>
+</div>
+
+<footer>
+  <a href="#">Términos</a> |
+  <a href="#">Privacidad</a>
+  <p style="margin-top:10px; color:#888;">© 2025 Logicraft Network. Todos los derechos reservados.</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="categoryModal">
+  <div class="modal-content">
+    <button class="close-btn" id="closeModal">X</button>
+    <h2>Selecciona una categoría</h2>
+    <div class="category-grid">
+      <button>Kaboom+</button>
+      <button>World Box</button>
+      <button>Gens</button>
+      <button>Earth</button>
+      <button>Mario Box</button>
+      <button>FNAF Box</button>
+      <button>BoxiniPvP</button>
+      <button>BoomPvP</button>
+      <button>Otros</button>
     </div>
   </div>
 </div>
 
 <script>
-/* ---------- UI: modal categories ---------- */
-const catModal = document.getElementById('catModal');
-document.getElementById('openCategories').addEventListener('click', ()=> {
-  catModal.style.display='flex'; catModal.setAttribute('aria-hidden','false');
-});
-document.getElementById('closeCat').addEventListener('click', ()=> {
-  catModal.style.display='none'; catModal.setAttribute('aria-hidden','true');
-});
-catModal.addEventListener('click', (e)=> { if(e.target===catModal){ catModal.style.display='none'; catModal.setAttribute('aria-hidden','true'); } });
+  const modal = document.getElementById("categoryModal");
+  const openModal = document.getElementById("openModal");
+  const closeModal = document.getElementById("closeModal");
 
-/* ---------- Filter products by category ---------- */
-function pickCategory(cat){
-  // close modal
-  catModal.style.display='none'; catModal.setAttribute('aria-hidden','true');
-  // show/hide product cards
-  const cards = document.querySelectorAll('#products .card');
-  let count=0;
-  cards.forEach(c=>{
-    const cats = (c.getAttribute('data-cat')||'').toLowerCase();
-    if(cat==='all' || cats.includes(cat)) { c.style.display='block'; count++; }
-    else c.style.display='none';
-  });
-  document.getElementById('count').textContent = count;
-  // scroll to products
-  document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-/* quick filter helper */
-function filterBy(name){
-  pickCategory(name==='all'?'all':name);
-}
-
-/* ---------- Product actions (placeholder UX) ---------- */
-function viewProduct(name){
-  alert('Ver producto: ' + name + '\n(En la versión final esto abriría la página de producto o modal con detalles).');
-}
-function addToCart(name,price){
-  // placeholder: open Tebex or show cart toast
-  const go = confirm(`Agregar "${name}" por $${price} USD al carrito? (Esto es demo visual).`);
-  if(go) { alert('Añadido al carrito (demo). Para compras reales integra Tebex.'); }
-}
-
-/* ---------- Terms / Privacy ---------- */
-function openTerms(){ document.getElementById('termsModal').style.display='flex'; }
-function closeTerms(){ document.getElementById('termsModal').style.display='none'; }
-function openPrivacy(){ alert('Política de privacidad: No compartimos datos. (Demo)'); }
-
-/* ---------- Tebex iframe helper ---------- */
-function openTebex(url){
-  // if a url provided, load it; otherwise show placeholder info.
-  const frame = document.getElementById('tebexFrame');
-  const tebexUrl = url || 'about:blank'; // replace with your https://<tu-tienda>.tebex.io
-  if(tebexUrl === 'about:blank'){
-    const ok = confirm('No hay URL de Tebex configurada. ¿Quieres abrir la URL de ejemplo?');
-    if(!ok) return;
-    frame.src = 'https://example.com'; // demo
-  } else {
-    frame.src = tebexUrl;
-  }
-}
-
-/* ---------- Init counts ---------- */
-document.getElementById('count').textContent = document.querySelectorAll('#products .card').length;
-
-/* ---------- Accessibility: close on ESC ---------- */
-window.addEventListener('keydown',(e)=> {
-  if(e.key==='Escape'){
-    catModal.style.display='none';
-    document.getElementById('termsModal').style.display='none';
-  }
-});
+  openModal.onclick = () => { modal.style.display = "flex"; };
+  closeModal.onclick = () => { modal.style.display = "none"; };
+  window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
 </script>
+
 </body>
 </html>
