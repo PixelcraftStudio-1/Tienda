@@ -5,182 +5,310 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pixelcraft Tienda</title>
 <style>
-/* Reset básico */
+/* Reset y base */
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+body { background-color:#000; color:#fff; }
 
-/* Body y fondo */
-body { background-color:#fff; color:#111; }
-
-/* Header / Menú fijo */
-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 50px;
-  background-color:#111;
-  color:#fff;
-  position:fixed;
-  width:100%;
-  top:0;
-  z-index:100;
-}
-header h1 { cursor:pointer; font-size:26px; font-weight:700; }
-nav ul { list-style:none; display:flex; gap:25px; }
-nav ul li a {
-  text-decoration:none;
-  color:#fff;
-  font-weight:500;
-  padding:10px 15px;
-  transition:all 0.3s ease;
-}
-nav ul li a:hover {
-  color:#111;
-  background-color:#fff;
-  border-radius:5px;
-}
-
-/* Banner de bienvenida */
-.banner {
-  margin-top:100px;
-  padding:60px 20px;
-  text-align:center;
-  background-color:#f5f5f5;
-}
-.banner h2 { font-size:40px; margin-bottom:20px; }
-.banner p { font-size:18px; line-height:1.6; }
-
-/* Sección de productos / tienda */
-.tienda-section {
-  padding:50px 20px;
-  max-width:1200px;
-  margin:0 auto;
-}
-.tienda-section h2 {
-  text-align:center;
-  font-size:36px;
-  margin-bottom:40px;
-}
-
-/* Grid de productos */
-.products {
+/* Layout general */
+.wrapper {
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-  gap:30px;
+  grid-template-columns:300px 1fr;
+  gap:20px;
+  max-width:1300px;
+  margin:30px auto;
+  padding:20px;
 }
 
-/* Tarjetas de producto */
-.product-card {
-  border:2px solid #111;
-  border-radius:8px;
-  overflow:hidden;
-  text-align:center;
-  background-color:#fff;
-  transition:all 0.3s ease;
-}
-.product-card:hover {
-  transform:translateY(-5px);
-  box-shadow:0 5px 20px rgba(0,0,0,0.1);
-}
-.product-card img {
-  width:100%;
-  height:200px;
-  object-fit:cover;
-}
-.product-card h3 {
-  margin:15px 0 5px 0;
-  font-size:20px;
-  font-weight:600;
-}
-.product-card p {
-  margin-bottom:15px;
-  font-size:18px;
-  font-weight:500;
-}
-
-/* Botón comprar */
-.product-card button {
-  padding:12px 20px;
-  border:2px solid #111;
-  background-color:#fff;
-  color:#111;
-  cursor:pointer;
-  font-weight:600;
-  border-radius:5px;
-  transition:all 0.3s ease;
-}
-.product-card button:hover {
+/* Panel lateral */
+.sidebar {
   background-color:#111;
-  color:#fff;
+  padding:20px;
+  border-radius:10px;
+}
+.sidebar h2 {
+  font-size:16px;
+  background-color:#fff;
+  color:#000;
+  padding:10px;
+  text-align:center;
+  border-radius:6px;
+  font-weight:700;
+  margin-bottom:20px;
+}
+.info, .recent {
+  background-color:#1a1a1a;
+  border-radius:8px;
+  padding:15px;
+  margin-bottom:20px;
+}
+.info h3, .recent h3 { font-size:15px; margin-bottom:10px; }
+.info p {
+  font-size:13px;
+  color:#ccc;
+  line-height:1.4;
+}
+.recent img {
+  width:38px;
+  height:38px;
+  border-radius:4px;
+  margin:3px;
+  filter:grayscale(100%);
 }
 
-/* Tebex embed */
-.tienda-embed {
-  margin-top:50px;
-  width:100%;
-  height:800px;
-  border:none;
+/* Contenido principal */
+.main {
+  background-color:#111;
+  padding:25px;
+  border-radius:10px;
+}
+
+/* Paquetes destacados */
+.featured {
+  background-color:#1a1a1a;
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:25px;
+}
+.featured h2 {
+  font-size:18px;
+  margin-bottom:15px;
+  font-weight:700;
+}
+.packages {
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+}
+.package {
+  background-color:#fff;
+  color:#000;
+  border-radius:8px;
+  flex:1;
+  min-width:250px;
+  padding:15px;
+  text-align:center;
+  transition:all 0.3s ease;
+}
+.package:hover {
+  transform:translateY(-5px);
+  box-shadow:0 4px 15px rgba(255,255,255,0.1);
+}
+.package img {
+  width:80px;
+  height:80px;
+  margin-bottom:10px;
+}
+.package h3 {
+  font-size:16px;
+  margin-bottom:5px;
+}
+.package p {
+  font-weight:600;
+  font-size:14px;
+}
+
+/* Meta mensual */
+.goal {
+  background-color:#1a1a1a;
+  padding:15px;
+  border-radius:8px;
+  margin-bottom:25px;
+}
+.goal h3 {
+  font-size:16px;
+  margin-bottom:10px;
+}
+.progress {
+  background-color:#333;
+  border-radius:5px;
+  overflow:hidden;
+  height:18px;
+}
+.progress-bar {
+  background-color:#fff;
+  width:100%; /* progreso completo */
+  height:100%;
+}
+
+/* Información tienda */
+.info-section {
+  background-color:#1a1a1a;
+  border-radius:8px;
+  padding:20px;
+  margin-bottom:25px;
+}
+.info-section h2 {
+  font-size:18px;
+  margin-bottom:10px;
+}
+.info-section p {
+  font-size:14px;
+  color:#ccc;
+  line-height:1.6;
+}
+
+/* Métodos de pago */
+.payment-methods {
+  background-color:#1a1a1a;
+  border-radius:8px;
+  padding:20px;
+  margin-bottom:25px;
+}
+.payment-methods h3 {
+  font-size:16px;
+  margin-bottom:15px;
+}
+.payment-logos {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.payment-logos img {
+  width:60px;
+  height:30px;
+  object-fit:contain;
+  filter:grayscale(100%);
+  border-radius:4px;
+  background-color:#fff;
+  padding:3px;
+}
+
+/* Política */
+.policy {
+  background-color:#1a1a1a;
+  border-radius:8px;
+  padding:20px;
+}
+.policy h3 {
+  font-size:16px;
+  margin-bottom:10px;
+}
+.policy p {
+  font-size:13px;
+  color:#ccc;
+  margin-bottom:10px;
+  line-height:1.5;
+}
+
+/* Botones */
+.buttons {
+  margin-top:15px;
+}
+.buttons button {
+  background-color:#000;
+  color:#fff;
+  border:2px solid #fff;
+  padding:10px 20px;
+  margin-right:10px;
+  border-radius:5px;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  font-weight:600;
+}
+.buttons button:hover {
+  background-color:#fff;
+  color:#000;
 }
 
 /* Footer */
 footer {
-  margin-top:50px;
-  padding:20px;
   text-align:center;
-  border-top:2px solid #111;
-  font-size:14px;
+  padding:20px;
+  border-top:1px solid #333;
+  margin-top:30px;
+  font-size:13px;
+  color:#aaa;
+}
+footer a { color:#fff; text-decoration:none; }
+footer a:hover { text-decoration:underline; }
+
+/* Responsive */
+@media(max-width:900px){
+  .wrapper{ grid-template-columns:1fr; }
 }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Pixelcraft Studio</h1>
-  <nav>
-    <ul>
-      <li><a href="#">Inicio</a></li>
-      <li><a href="#">Tienda</a></li>
-      <li><a href="#">Contacto</a></li>
-    </ul>
-  </nav>
-</header>
-
-<section class="banner">
-  <h2>Bienvenido a Pixelcraft Studio</h2>
-  <p>Compra rangos, paquetes y recursos exclusivos para Minecraft. ¡Todo en un solo lugar con estilo Mineboom!</p>
-</section>
-
-<section class="tienda-section">
-  <h2>Productos Destacados</h2>
-  <div class="products">
-    <div class="product-card">
-      <img src="https://via.placeholder.com/300x200.png?text=Producto+1" alt="Producto 1">
-      <h3>Producto 1</h3>
-      <p>$5.00</p>
-      <button>Comprar</button>
+<div class="wrapper">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Selecciona una categoría</h2>
+    <div class="info">
+      <h3>Información</h3>
+      <p>Pixelcraft Studio no está afiliado con Mojang AB.  
+      Todos los pagos son finales y no reembolsables.</p>
     </div>
-    <div class="product-card">
-      <img src="https://via.placeholder.com/300x200.png?text=Producto+2" alt="Producto 2">
-      <h3>Producto 2</h3>
-      <p>$7.50</p>
-      <button>Comprar</button>
+    <div class="recent">
+      <h3>Pagos Recientes</h3>
+      <img src="https://via.placeholder.com/38" alt="">
+      <img src="https://via.placeholder.com/38" alt="">
+      <img src="https://via.placeholder.com/38" alt="">
+      <img src="https://via.placeholder.com/38" alt="">
     </div>
-    <div class="product-card">
-      <img src="https://via.placeholder.com/300x200.png?text=Producto+3" alt="Producto 3">
-      <h3>Producto 3</h3>
-      <p>$10.00</p>
-      <button>Comprar</button>
-    </div>
-  </div>
-</section>
+  </aside>
 
-<!-- Sección Tebex para tienda real -->
-<section class="tienda-section">
-  <h2>Tienda Oficial</h2>
-  <iframe class="tienda-embed" src="https://tu-tienda.tebex.io"></iframe>
-</section>
+  <!-- Main -->
+  <main class="main">
+    <section class="featured">
+      <h2>Paquetes Destacados</h2>
+      <div class="packages">
+        <div class="package">
+          <img src="https://via.placeholder.com/80" alt="">
+          <h3>Multiplicador 10x</h3>
+          <p><del>$9.99</del> <strong>$2.99 USD</strong></p>
+        </div>
+        <div class="package">
+          <img src="https://via.placeholder.com/80" alt="">
+          <h3>KaBoom</h3>
+          <p><del>$29.99</del> <strong>$19.99 USD</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="goal">
+      <h3>Meta Mensual</h3>
+      <div class="progress">
+        <div class="progress-bar"></div>
+      </div>
+    </section>
+
+    <section class="info-section">
+      <h2>Bienvenido a la Tienda Oficial</h2>
+      <p>Bienvenido a la tienda de Pixelcraft Studio.  
+      Aquí podrás adquirir rangos, paquetes y beneficios para nuestro servidor.  
+      Todos los artículos son permanentes y globales.</p>
+    </section>
+
+    <section class="payment-methods">
+      <h3>Métodos de Pago Disponibles</h3>
+      <div class="payment-logos">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/MasterCard_Logo.svg" alt="MasterCard">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/PayPal_Logo.svg" alt="PayPal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Google_Pay_Logo.svg" alt="GPay">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Apple_Pay_logo.svg" alt="Apple Pay">
+      </div>
+    </section>
+
+    <section class="policy">
+      <h3>Política de Reembolso</h3>
+      <p>Todos los pagos son finales y no reembolsables.  
+      Intentar revertir un pago podría conllevar sanciones en el servidor.  
+      El tiempo de entrega puede tardar entre 5 y 20 minutos.</p>
+
+      <div class="buttons">
+        <button>Términos y Condiciones</button>
+        <button>Imprenta</button>
+        <button>Política de Privacidad</button>
+      </div>
+    </section>
+  </main>
+</div>
 
 <footer>
-  &copy; 2025 Pixelcraft Studio - Todos los derechos reservados
+  &copy; 2025 Pixelcraft Studio — Todos los derechos reservados.  
+  <br>No estamos afiliados con Mojang AB.
 </footer>
 
 </body>
