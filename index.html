@@ -1,50 +1,70 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tienda Minecraft - Menú</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1e1e1e;
+  color: #fff;
+}
 
-<header>
-  <h1>Tienda Minecraft</h1>
-</header>
+header {
+  background-color: #2c2c2c;
+  padding: 15px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
 
-<nav class="menu">
-  <ul>
-    <li class="dropdown">
-      <a href="#">Kaboom+</a>
-    </li>
-    <li class="dropdown">
-      <a href="#">World Box</a>
-      <ul class="submenu">
-        <li>Rangos</li>
-        <li>Mejora de Rango</li>
-        <li>Kits</li>
-        <li>Llaves</li>
-        <li>Premium</li>
-        <li>Exclusivo</li>
-      </ul>
-    </li>
-    <li class="dropdown">
-      <a href="#">Gens</a>
-      <ul class="submenu">
-        <li>Rangos</li>
-        <li>Mejora de Rango</li>
-        <li>Llaves</li>
-        <li>Multiplicador</li>
-        <li>Kits Premium</li>
-        <li>S-Kits</li>
-        <li>Exclusivo</li>
-        <li>Kits</li>
-      </ul>
-    </li>
-    <!-- Añade más categorías según quieras -->
-  </ul>
-</nav>
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  background-color: #333;
+  flex-wrap: wrap;
+}
 
-<script src="js/menu.js"></script>
-</body>
-</html>
+.menu ul li {
+  position: relative;
+}
+
+.menu ul li a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.menu ul li a:hover {
+  background-color: #555;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  background-color: #444;
+  flex-direction: column;
+  min-width: 200px;
+  z-index: 1000;
+}
+
+.submenu li a {
+  padding: 10px 20px;
+  display: block;
+}
+
+.dropdown:hover .submenu {
+  display: flex;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .menu ul {
+    flex-direction: column;
+  }
+  .submenu {
+    position: relative;
+    top: 0;
+  }
+}
