@@ -8,7 +8,6 @@
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
 body { background-color:#000; color:#fff; }
 
-/* Layout general */
 .wrapper {
   display:grid;
   grid-template-columns:300px 1fr;
@@ -18,7 +17,7 @@ body { background-color:#000; color:#fff; }
   padding:20px;
 }
 
-/* Panel lateral */
+/* PANEL LATERAL */
 .sidebar {
   background-color:#111;
   padding:20px;
@@ -33,7 +32,15 @@ body { background-color:#000; color:#fff; }
   border-radius:6px;
   font-weight:700;
   margin-bottom:20px;
+  cursor:pointer;
+  transition:0.3s;
 }
+.sidebar h2:hover {
+  background-color:#ccc;
+  transform:scale(1.02);
+}
+
+/* INFO */
 .info, .recent {
   background-color:#1a1a1a;
   border-radius:8px;
@@ -41,248 +48,90 @@ body { background-color:#000; color:#fff; }
   margin-bottom:20px;
 }
 .info h3, .recent h3 { font-size:15px; margin-bottom:10px; }
-.info p {
-  font-size:13px;
-  color:#ccc;
-  line-height:1.4;
-}
+.info p { font-size:13px; color:#ccc; line-height:1.4; }
 .recent img {
-  width:38px;
-  height:38px;
-  border-radius:4px;
-  margin:3px;
-  filter:grayscale(100%);
+  width:38px; height:38px; border-radius:4px;
+  margin:3px; filter:grayscale(100%);
 }
 
-/* Contenido principal */
-.main {
-  background-color:#111;
-  padding:25px;
-  border-radius:10px;
-}
+/* CONTENIDO PRINCIPAL */
+.main { background-color:#111; padding:25px; border-radius:10px; }
 
-/* Paquetes destacados */
-.featured {
-  background-color:#1a1a1a;
-  border-radius:10px;
-  padding:15px;
-  margin-bottom:25px;
-}
-.featured h2 {
-  font-size:18px;
-  margin-bottom:15px;
-  font-weight:700;
-}
-.packages {
-  display:flex;
-  flex-wrap:wrap;
-  gap:15px;
-}
-.package {
-  background-color:#fff;
-  color:#000;
-  border-radius:8px;
-  flex:1;
-  min-width:250px;
-  padding:15px;
-  text-align:center;
-  transition:all 0.3s ease;
-  cursor:pointer;
-}
-.package:hover {
-  transform:translateY(-5px);
-  box-shadow:0 4px 15px rgba(255,255,255,0.1);
-}
-.package img {
-  width:80px;
-  height:80px;
-  margin-bottom:10px;
-}
-.package h3 {
-  font-size:16px;
-  margin-bottom:5px;
-}
-.package p {
-  font-weight:600;
-  font-size:14px;
-}
-
-/* Meta mensual */
-.goal {
-  background-color:#1a1a1a;
-  padding:15px;
-  border-radius:8px;
-  margin-bottom:25px;
-}
-.goal h3 {
-  font-size:16px;
-  margin-bottom:10px;
-}
-.progress {
-  background-color:#333;
-  border-radius:5px;
-  overflow:hidden;
-  height:18px;
-}
-.progress-bar {
-  background-color:#fff;
-  width:80%;
-  height:100%;
-  transition:width 1s ease;
-}
-
-/* Información */
-.info-section {
-  background-color:#1a1a1a;
-  border-radius:8px;
-  padding:20px;
-  margin-bottom:25px;
-}
-.info-section h2 {
-  font-size:18px;
-  margin-bottom:10px;
-}
-.info-section p {
-  font-size:14px;
-  color:#ccc;
-  line-height:1.6;
-}
-
-/* Métodos de pago */
-.payment-methods {
-  background-color:#1a1a1a;
-  border-radius:8px;
-  padding:20px;
-  margin-bottom:25px;
-}
-.payment-methods h3 {
-  font-size:16px;
-  margin-bottom:15px;
-}
-.payment-logos {
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-.payment-logos img {
-  width:60px;
-  height:30px;
-  object-fit:contain;
-  filter:grayscale(100%);
-  border-radius:4px;
-  background-color:#fff;
-  padding:3px;
-}
-
-/* Política */
-.policy {
-  background-color:#1a1a1a;
-  border-radius:8px;
-  padding:20px;
-}
-.policy h3 {
-  font-size:16px;
-  margin-bottom:10px;
-}
-.policy p {
-  font-size:13px;
-  color:#ccc;
-  margin-bottom:10px;
-  line-height:1.5;
-}
-
-/* Botones */
-.buttons {
-  margin-top:15px;
-}
-.buttons button {
-  background-color:#000;
-  color:#fff;
-  border:2px solid #fff;
-  padding:10px 20px;
-  margin-right:10px;
-  border-radius:5px;
-  cursor:pointer;
-  transition:all 0.3s ease;
-  font-weight:600;
-}
-.buttons button:hover {
-  background-color:#fff;
-  color:#000;
-  transform:scale(1.05);
-}
-.buttons button:active {
-  transform:scale(0.95);
-}
-
-/* Modal */
-.modal {
+/* CATEGORÍAS MODAL */
+.category-modal {
   display:none;
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.8);
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.85);
   justify-content:center;
   align-items:center;
-  z-index:200;
+  z-index:300;
 }
-.modal-content {
-  background-color:#111;
-  border:2px solid #fff;
+.category-content {
+  background-color:#1a1a1a;
+  border:2px solid #333;
   padding:30px;
   border-radius:10px;
-  width:90%;
-  max-width:500px;
   text-align:center;
+  width:90%;
+  max-width:600px;
   animation:pop 0.3s ease;
+  box-shadow:0 0 25px rgba(255,255,255,0.05);
 }
-.modal-content h2 {
-  margin-bottom:15px;
+.category-content h2 {
+  margin-bottom:20px;
+  font-size:18px;
 }
-.modal-content p {
-  color:#ccc;
-  font-size:14px;
-  line-height:1.5;
+.category-buttons {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
-.close-btn {
+.category-buttons button {
+  background-color:#111;
+  color:#fff;
+  border:none;
+  padding:10px 0;
+  font-weight:600;
+  border-radius:6px;
+  transition:all 0.2s;
+  cursor:pointer;
+}
+.category-buttons button:hover {
   background-color:#fff;
   color:#000;
+}
+.close-category {
+  position:absolute;
+  top:20px; right:25px;
+  background:#900;
+  color:#fff;
   border:none;
-  padding:10px 20px;
-  margin-top:20px;
+  font-size:18px;
+  font-weight:bold;
   border-radius:5px;
+  width:30px; height:30px;
   cursor:pointer;
-  font-weight:600;
   transition:all 0.3s;
 }
-.close-btn:hover { background-color:#000; color:#fff; border:2px solid #fff; }
-@keyframes pop { from{transform:scale(0.8);opacity:0;} to{transform:scale(1);opacity:1;} }
+.close-category:hover { background:#f00; transform:scale(1.1); }
 
-/* Footer */
-footer {
-  text-align:center;
-  padding:20px;
-  border-top:1px solid #333;
-  margin-top:30px;
-  font-size:13px;
-  color:#aaa;
+/* ANIMACIÓN */
+@keyframes pop {
+  from { transform:scale(0.8); opacity:0; }
+  to { transform:scale(1); opacity:1; }
 }
-footer a { color:#fff; text-decoration:none; }
-footer a:hover { text-decoration:underline; }
 
 /* Responsive */
-@media(max-width:900px){
-  .wrapper{ grid-template-columns:1fr; }
-}
+@media(max-width:900px){ .wrapper{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
 
 <div class="wrapper">
   <aside class="sidebar">
-    <h2>Selecciona una categoría</h2>
+    <h2 onclick="openCategoryModal()">Selecciona una categoría</h2>
     <div class="info">
       <h3>Información</h3>
       <p>Pixelcraft Studio no está afiliado con Mojang AB.  
@@ -298,98 +147,36 @@ footer a:hover { text-decoration:underline; }
   </aside>
 
   <main class="main">
-    <section class="featured">
-      <h2>Paquetes Destacados</h2>
-      <div class="packages">
-        <div class="package">
-          <img src="https://via.placeholder.com/80" alt="">
-          <h3>Multiplicador 10x</h3>
-          <p><del>$9.99</del> <strong>$2.99 USD</strong></p>
-        </div>
-        <div class="package">
-          <img src="https://via.placeholder.com/80" alt="">
-          <h3>KaBoom</h3>
-          <p><del>$29.99</del> <strong>$19.99 USD</strong></p>
-        </div>
-      </div>
-    </section>
-
-    <section class="goal">
-      <h3>Meta Mensual</h3>
-      <div class="progress">
-        <div class="progress-bar"></div>
-      </div>
-    </section>
-
-    <section class="info-section">
-      <h2>Bienvenido a la Tienda Oficial</h2>
-      <p>Bienvenido a la tienda de Pixelcraft Studio.  
-      Aquí podrás adquirir rangos, paquetes y beneficios para nuestro servidor.  
-      Todos los artículos son permanentes y globales.</p>
-    </section>
-
-    <section class="payment-methods">
-      <h3>Métodos de Pago Disponibles</h3>
-      <div class="payment-logos">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/MasterCard_Logo.svg" alt="MasterCard">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/PayPal_Logo.svg" alt="PayPal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Google_Pay_Logo.svg" alt="GPay">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Apple_Pay_logo.svg" alt="Apple Pay">
-      </div>
-    </section>
-
-    <section class="policy">
-      <h3>Política de Reembolso</h3>
-      <p>Todos los pagos son finales y no reembolsables.  
-      Intentar revertir un pago podría conllevar sanciones en el servidor.  
-      El tiempo de entrega puede tardar entre 5 y 20 minutos.</p>
-
-      <div class="buttons">
-        <button onclick="openModal('terms')">Términos y Condiciones</button>
-        <button onclick="openModal('imprenta')">Imprenta</button>
-        <button onclick="openModal('privacy')">Política de Privacidad</button>
-      </div>
-    </section>
+    <h1>Bienvenido a la tienda oficial de Pixelcraft Studio</h1>
+    <p>Selecciona una categoría para ver los paquetes disponibles.</p>
   </main>
 </div>
 
-<footer>
-  &copy; 2025 Pixelcraft Studio — Todos los derechos reservados.  
-  <br>No estamos afiliados con Mojang AB.
-</footer>
-
-<!-- Modales -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <h2 id="modal-title"></h2>
-    <p id="modal-text"></p>
-    <button class="close-btn" onclick="closeModal()">Cerrar</button>
+<!-- MODAL DE CATEGORÍAS -->
+<div class="category-modal" id="categoryModal">
+  <div class="category-content">
+    <button class="close-category" onclick="closeCategoryModal()">✕</button>
+    <h2>Selecciona una categoría</h2>
+    <div class="category-buttons">
+      <button>Kaboom+</button>
+      <button>World Box</button>
+      <button>Gens</button>
+      <button>Earth</button>
+      <button>Mario Box</button>
+      <button>FNAF Box</button>
+      <button>BoxiniPvP</button>
+      <button>BoomPvP</button>
+      <button style="grid-column:span 2;">Otros</button>
+    </div>
   </div>
 </div>
 
 <script>
-function openModal(type) {
-  const modal = document.getElementById('modal');
-  const title = document.getElementById('modal-title');
-  const text = document.getElementById('modal-text');
-  
-  if (type === 'terms') {
-    title.textContent = 'Términos y Condiciones';
-    text.textContent = 'Al realizar una compra, aceptas las normas de Pixelcraft Studio. Los productos son digitales, permanentes y no reembolsables.';
-  } else if (type === 'imprenta') {
-    title.textContent = 'Imprenta';
-    text.textContent = 'Pixelcraft Studio | Proyecto administrado por la comunidad. Contacto: soporte@pixelcraftstudio.com';
-  } else if (type === 'privacy') {
-    title.textContent = 'Política de Privacidad';
-    text.textContent = 'No compartimos tus datos personales con terceros. Toda la información se maneja mediante los sistemas seguros de Tebex.';
-  }
-
-  modal.style.display = 'flex';
+function openCategoryModal() {
+  document.getElementById("categoryModal").style.display = "flex";
 }
-
-function closeModal() {
-  document.getElementById('modal').style.display = 'none';
+function closeCategoryModal() {
+  document.getElementById("categoryModal").style.display = "none";
 }
 </script>
 
