@@ -3,37 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tienda Minecraft</title>
+  <title>Tienda Minecraft - Menú</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-    <img src="images/logo.png" alt="Logo Tienda" class="logo">
-    <h1>Tienda Minecraft</h1>
-  </header>
 
-  <main>
-    <section class="products">
-      <div class="product-card">
-        <h2>Rango VIP</h2>
-        <p>Incluye acceso a zonas exclusivas y perks.</p>
-        <span>$5 USD</span>
-        <button onclick="comprar('VIP')">Comprar</button>
-      </div>
+<header>
+  <h1>Tienda Minecraft</h1>
+</header>
 
-      <div class="product-card">
-        <h2>Kit Starter</h2>
-        <p>Incluye armadura y herramientas básicas.</p>
-        <span>$3 USD</span>
-        <button onclick="comprar('Starter')">Comprar</button>
-      </div>
-    </section>
-  </main>
+<nav class="menu">
+  <ul>
+    <li class="dropdown">
+      <a href="#">Kaboom+</a>
+    </li>
+    <li class="dropdown">
+      <a href="#">World Box</a>
+      <ul class="submenu">
+        <li>Rangos</li>
+        <li>Mejora de Rango</li>
+        <li>Kits</li>
+        <li>Llaves</li>
+        <li>Premium</li>
+        <li>Exclusivo</li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#">Gens</a>
+      <ul class="submenu">
+        <li>Rangos</li>
+        <li>Mejora de Rango</li>
+        <li>Llaves</li>
+        <li>Multiplicador</li>
+        <li>Kits Premium</li>
+        <li>S-Kits</li>
+        <li>Exclusivo</li>
+        <li>Kits</li>
+      </ul>
+    </li>
+    <!-- Añade más categorías según quieras -->
+  </ul>
+</nav>
 
-  <footer>
-    <p>© 2025 Minecraft Store</p>
-  </footer>
-
-  <script src="js/main.js"></script>
+<script src="js/menu.js"></script>
 </body>
 </html>
