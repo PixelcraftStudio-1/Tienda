@@ -110,58 +110,38 @@
   .welcome p{color:var(--muted);font-size:14px;margin:6px 0 0}
 
   /* 🔹 Top Compras */
-  .top-compras-container {
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:40px;
-    flex-wrap:wrap;
-    margin-top:20px;
+  .top-compras {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
   }
-  .top-box {
-    background: var(--panel);
-    width:240px;
-    height:260px;
-    border:3px solid var(--btn-border);
-    border-radius:16px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 0 20px rgba(0,170,255,0.4);
-    transition:all 0.3s ease;
-    position:relative;
-    overflow:hidden;
+  .compra-card {
+    width: 250px;
+    height: 200px;
+    border: 2px solid var(--btn-border);
+    border-radius: 14px;
+    background: #000;
+    box-shadow: 0 0 10px #00aaff80;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s ease;
   }
-  .top-box::before {
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:16px;
-    box-shadow:0 0 25px 5px rgba(0,170,255,0.3);
-    opacity:0;
-    transition:opacity 0.3s ease;
+  .compra-card:hover {
+    box-shadow: 0 0 25px #00aaff;
+    transform: translateY(-6px);
   }
-  .top-box:hover {
-    transform:translateY(-6px);
-    box-shadow:0 0 40px rgba(0,170,255,0.8);
+  .compra-card img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 10px;
   }
-  .top-box:hover::before {
-    opacity:1;
-  }
-  .top-box img {
-    width:100px;
-    height:100px;
-    object-fit:contain;
-    border-radius:10px;
-    margin-bottom:12px;
-    filter:drop-shadow(0 0 10px rgba(0,170,255,0.6));
-  }
-  .top-box span {
-    font-weight:700;
-    color:var(--accent);
-    font-size:16px;
-    text-shadow:0 0 6px rgba(0,170,255,0.8);
+  .compra-card span {
+    font-weight: 700;
+    color: var(--accent);
   }
 
   .policy {
@@ -193,6 +173,7 @@
   }
   .mini-btn:hover{ transform: translateY(-3px); background: rgba(0,170,255,0.08) }
 
+  /* Modales */
   .modal-backdrop{
     position:fixed;
     inset:0;
@@ -208,8 +189,8 @@
     background: #0b0b0b;
     border-radius:14px;
     padding:20px;
-    border:1px solid var(--border);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    border:1px solid var(--btn-border);
+    box-shadow: 0 20px 60px rgba(0,170,255,0.3);
     transform: translateY(8px);
     opacity:0;
     transition: transform .18s ease, opacity .18s ease;
@@ -271,17 +252,17 @@
       <p>Compra rangos, paquetes y beneficios para nuestros servidores.</p>
     </div>
 
-    <!-- 🔹 Sección Top Compras -->
-    <section class="top-compras-container">
-      <div class="top-box">
-        <img src="https://via.placeholder.com/100x100?text=Logo" alt="Top 1">
-        <span>Top Compras #1</span>
+    <!-- 🔹 Cuadros Top Compras -->
+    <div class="top-compras">
+      <div class="compra-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="logo">
+        <span>Top Compras</span>
       </div>
-      <div class="top-box">
-        <img src="https://via.placeholder.com/100x100?text=Logo" alt="Top 2">
-        <span>Top Compras #2</span>
+      <div class="compra-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/992/992651.png" alt="logo">
+        <span>Top Compras</span>
       </div>
-    </section>
+    </div>
 
     <section class="policy">
       <h3 style="color:var(--accent);font-size:15px">Política de Reembolso</h3>
@@ -290,9 +271,9 @@
     </section>
 
     <div class="bottom-actions">
-      <button class="mini-btn" onclick="openTerms()">Términos</button>
-      <button class="mini-btn" onclick="openImprenta()">Imprenta</button>
-      <button class="mini-btn" onclick="openPrivacy()">Privacidad</button>
+      <button class="mini-btn" id="openTerms">Términos</button>
+      <button class="mini-btn" id="openImprenta">Imprenta</button>
+      <button class="mini-btn" id="openPrivacy">Privacidad</button>
     </div>
   </main>
 </div>
@@ -301,10 +282,10 @@
   © 2025 Logicraft Network — No afiliado a Mojang AB
 </footer>
 
-<!-- Modal Categorías -->
+<!-- 🔹 Modal Categorías -->
 <div class="modal-backdrop" id="catModal">
   <div class="modal-panel">
-    <div class="modal-header">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
       <h3>Selecciona una categoría</h3>
       <button class="close-x" id="closeCat">✕</button>
     </div>
@@ -322,12 +303,61 @@
   </div>
 </div>
 
+<!-- 🔹 Modales de Términos, Imprenta y Privacidad -->
+<div class="modal-backdrop" id="termsModal">
+  <div class="modal-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3>Términos del Servicio</h3>
+      <button class="close-x" onclick="closeModal('termsModal')">✕</button>
+    </div>
+    <p>Al realizar una compra en Logicraft Tienda, aceptas cumplir con todas las reglas y normas del servidor. Los productos digitales son entregados automáticamente y no son reembolsables.</p>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="imprentaModal">
+  <div class="modal-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3>Imprenta</h3>
+      <button class="close-x" onclick="closeModal('imprentaModal')">✕</button>
+    </div>
+    <p>Logicraft Network • Contacto: soporte@logicraft.net • Santiago, Chile.</p>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="privacyModal">
+  <div class="modal-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3>Política de Privacidad</h3>
+      <button class="close-x" onclick="closeModal('privacyModal')">✕</button>
+    </div>
+    <p>Respetamos tu privacidad. La información personal solo se usa para procesar pagos y verificar entregas dentro del servidor. No compartimos datos con terceros.</p>
+  </div>
+</div>
+
 <script>
 const catModal=document.getElementById('catModal');
-document.getElementById('openCategories').onclick=()=>{catModal.style.display='flex';catModal.classList.add('show');};
-document.getElementById('closeCat').onclick=()=>{catModal.style.display='none';catModal.classList.remove('show');};
-catModal.addEventListener('click',e=>{if(e.target===catModal)document.getElementById('closeCat').click();});
+document.getElementById('openCategories').onclick=()=>openModal('catModal');
+document.getElementById('closeCat').onclick=()=>closeModal('catModal');
+catModal.addEventListener('click',e=>{if(e.target===catModal)closeModal('catModal');});
+
 document.getElementById('joinDiscord').onclick=()=>window.open('https://discord.gg/Rz5rj4YvZn','_blank');
+
+// 🔹 Abrir / cerrar modales
+function openModal(id){
+  const modal=document.getElementById(id);
+  modal.style.display='flex';
+  setTimeout(()=>modal.classList.add('show'),10);
+}
+function closeModal(id){
+  const modal=document.getElementById(id);
+  modal.classList.remove('show');
+  setTimeout(()=>modal.style.display='none',180);
+}
+
+// Botones del footer
+document.getElementById('openTerms').onclick=()=>openModal('termsModal');
+document.getElementById('openImprenta').onclick=()=>openModal('imprentaModal');
+document.getElementById('openPrivacy').onclick=()=>openModal('privacyModal');
 </script>
 </body>
 </html>
