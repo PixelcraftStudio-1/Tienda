@@ -5,27 +5,25 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Logicraft Tienda</title>
 
-<!-- Tipografías -->
+<!-- Tipografía -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --bg: #0a0a0a;
-    --panel: #111111;
-    --muted: rgba(230,230,230,0.7);
-    --accent: #fefefe;
-    --border: rgba(255,255,255,0.08);
-    --btn-bg: #0d0d0d;
-    --btn-border: #ffffff;
+    --bg: #000000;
+    --panel: #0b0b0b;
+    --muted: rgba(255,255,255,0.65);
+    --accent: #ffffff;
+    --border: rgba(255,255,255,0.12);
+    --btn-bg: #000000;
+    --btn-border: #00aaff; /* 🔹 bordes azules */
     --radius: 12px;
-    --glow: rgba(0,153,255,0.35);
   }
 
   *{box-sizing:border-box}
-  html,body{height:100%;margin:0;background:var(--bg);color:var(--accent);font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--accent);font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
   a{color:inherit;text-decoration:none}
 
-  /* Page layout */
   .page {
     max-width:1200px;
     margin:28px auto;
@@ -35,7 +33,7 @@
     gap:20px;
   }
 
-  /* Sidebar (left) */
+  /* Sidebar */
   .sidebar {
     background: linear-gradient(180deg,var(--panel), #0e0e0e);
     border-radius: var(--radius);
@@ -51,17 +49,12 @@
     margin-bottom:16px;
   }
   .logo {
-    width:48px;height:48px;border-radius:10px;
-    background: linear-gradient(135deg, #0af, #08f);
-    color:#fff;
-    display:flex;align-items:center;justify-content:center;
-    font-weight:700;font-size:18px;
-    box-shadow:0 0 12px var(--glow);
+    width:48px;height:48px;border-radius:10px;background:#00aaff; /* 🔹 logo azul */
+    color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;
   }
   .brand h1{font-size:16px;margin:0}
   .brand .tag{font-size:12px;color:var(--muted)}
 
-  .side-block{background:transparent;border-radius:10px;padding-top:6px}
   .select-cat {
     display:block;
     width:100%;
@@ -73,11 +66,9 @@
     font-weight:700;
     text-align:left;
     cursor:pointer;
-    transition:transform .12s ease, background .12s, box-shadow .2s;
+    transition:transform .12s ease, background .12s;
   }
-  .select-cat:hover{ transform:translateY(-3px); background: rgba(255,255,255,0.05); box-shadow:0 0 10px var(--glow); }
-
-  .spacer{height:14px}
+  .select-cat:hover{ transform:translateY(-3px); background: rgba(0,170,255,0.08); }
 
   .discord-box{
     margin-top:8px;
@@ -100,11 +91,10 @@
     border-radius:10px;
     cursor:pointer;
     font-weight:700;
-    transition: transform .12s ease, background .12s, box-shadow .2s;
+    transition: transform .12s ease, background .12s;
   }
-  .discord-btn:hover{ transform:translateY(-3px); background: rgba(255,255,255,0.05); box-shadow:0 0 10px var(--glow); }
+  .discord-btn:hover{ transform:translateY(-3px); background: rgba(0,170,255,0.08) }
 
-  /* Right content */
   .content {
     background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
     border-radius: var(--radius);
@@ -119,20 +109,16 @@
   .welcome h2{margin:0;font-size:20px}
   .welcome p{color:var(--muted);font-size:14px;margin:6px 0 0}
 
-  /* Policy block */
   .policy {
     margin-top:6px;
-    background: transparent;
     color: var(--muted);
     line-height:1.6;
     font-size:14px;
     padding:12px;
     border-radius:10px;
   }
-
   .policy strong{color:var(--accent)}
 
-  /* Buttons row (bottom of content) */
   .bottom-actions{
     display:flex;
     gap:10px;
@@ -148,11 +134,10 @@
     border-radius:10px;
     font-weight:700;
     cursor:pointer;
-    transition: transform .12s ease, background .12s, box-shadow .2s;
+    transition: transform .12s ease, background .12s;
   }
-  .mini-btn:hover{ transform: translateY(-3px); background: rgba(255,255,255,0.05); box-shadow:0 0 10px var(--glow); }
+  .mini-btn:hover{ transform: translateY(-3px); background: rgba(0,170,255,0.08) }
 
-  /* Modal */
   .modal-backdrop{
     position:fixed;
     inset:0;
@@ -176,8 +161,6 @@
   }
   .modal-backdrop.show .modal-panel{ transform: translateY(0); opacity:1 }
 
-  .modal-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:12px; }
-  .modal-header h3{ font-size:16px; margin:0 }
   .close-x{
     background:#000;border:2px solid var(--btn-border);color:var(--accent);padding:6px 10px;border-radius:8px;cursor:pointer;font-weight:700;
   }
@@ -196,23 +179,21 @@
     color:var(--accent);
     font-weight:700;
     cursor:pointer;
-    transition: transform .12s, background .12s, box-shadow .2s;
+    transition: transform .12s, background .12s;
   }
-  .cat-btn:hover{ transform:translateY(-4px); background: rgba(255,255,255,0.05); box-shadow:0 0 10px var(--glow); }
+  .cat-btn:hover{ transform:translateY(-4px); background: rgba(0,170,255,0.08); color:var(--accent) }
 
-  /* small screens */
   @media (max-width:900px){
     .page{grid-template-columns:1fr; padding:14px}
     .sidebar{order:2}
     .content{order:1}
-    .modal-panel{width:92%}
   }
 </style>
 </head>
 <body>
 
-<div class="page" role="main">
-  <aside class="sidebar" aria-label="Panel lateral">
+<div class="page">
+  <aside class="sidebar">
     <div class="brand">
       <div class="logo">L</div>
       <div>
@@ -221,14 +202,10 @@
       </div>
     </div>
 
-    <div class="side-block">
-      <button class="select-cat" id="openCategories">Selecciona una categoría ▾</button>
-    </div>
+    <button class="select-cat" id="openCategories">Selecciona una categoría ▾</button>
 
-    <div class="spacer"></div>
-
-    <div class="discord-box" aria-label="Soporte Discord">
-      <p>¿Necesitas ayuda? Únete a nuestro servidor de Discord para soporte y tickets.</p>
+    <div class="discord-box">
+      <p>¿Necesitas ayuda? Únete a nuestro servidor de Discord.</p>
       <button class="discord-btn" id="joinDiscord">Unirse al servidor</button>
     </div>
   </aside>
@@ -236,23 +213,19 @@
   <main class="content">
     <div class="welcome">
       <h2>Bienvenido a Logicraft Tienda</h2>
-      <p>Compra rangos, paquetes y beneficios para nuestros servidores. Selecciona una categoría desde la izquierda para ver las opciones.</p>
+      <p>Compra rangos, paquetes y beneficios para nuestros servidores.</p>
     </div>
 
-    <section class="policy" aria-labelledby="policyTitle">
-      <h3 id="policyTitle" style="margin-top:0;margin-bottom:8px;color:var(--accent);font-size:15px">Política de Reembolso</h3>
-      <p>
-        Todos los pagos son finales y no son reembolsables. El intento de reembolsar un pago, tendrá como consecuencia una prohibición permanente e irreversible de nuestro servidor, y en las diversas tiendas existentes de servidores.
-      </p>
-      <p style="margin-top:10px;">
-        El tiempo de espera para recibir un paquete, puede tomar de 5-20 minutos. En caso de superar este tiempo de espera, abre un ticket en nuestro servidor de discord con pruebas de tu compra.
-      </p>
+    <section class="policy">
+      <h3 style="color:var(--accent);font-size:15px">Política de Reembolso</h3>
+      <p>Todos los pagos son finales y no son reembolsables. El intento de reembolsar un pago resultará en una prohibición permanente.</p>
+      <p>El tiempo de espera para recibir un paquete puede tomar de 5-20 minutos. Si pasa ese tiempo, abre un ticket en nuestro Discord.</p>
     </section>
 
-    <div class="bottom-actions" role="navigation" aria-label="Enlaces legales">
-      <button class="mini-btn" onclick="openTerms()">Términos y condiciones</button>
+    <div class="bottom-actions">
+      <button class="mini-btn" onclick="openTerms()">Términos</button>
       <button class="mini-btn" onclick="openImprenta()">Imprenta</button>
-      <button class="mini-btn" onclick="openPrivacy()">Política de Privacidad</button>
+      <button class="mini-btn" onclick="openPrivacy()">Privacidad</button>
     </div>
   </main>
 </div>
@@ -261,53 +234,33 @@
   © 2025 Logicraft Network — No afiliado a Mojang AB
 </footer>
 
-<!-- CATEGORIES MODAL -->
-<div class="modal-backdrop" id="catModal" aria-hidden="true">
-  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="catTitle">
+<!-- Modal Categorías -->
+<div class="modal-backdrop" id="catModal">
+  <div class="modal-panel">
     <div class="modal-header">
-      <h3 id="catTitle">Selecciona una categoría</h3>
+      <h3>Selecciona una categoría</h3>
       <button class="close-x" id="closeCat">✕</button>
     </div>
-
-    <div class="cat-grid" role="menu">
-      <button class="cat-btn" data-cat="kaboom" onclick="pickCategory('kaboom')">Kaboom+</button>
-      <button class="cat-btn" data-cat="worldbox" onclick="pickCategory('worldbox')">World Box</button>
-      <button class="cat-btn" data-cat="gens" onclick="pickCategory('gens')">Gens</button>
-      <button class="cat-btn" data-cat="earth" onclick="pickCategory('earth')">Earth</button>
-      <button class="cat-btn" data-cat="mario" onclick="pickCategory('mario')">Mario Box</button>
-      <button class="cat-btn" data-cat="fnaf" onclick="pickCategory('fnaf')">FNAF Box</button>
-      <button class="cat-btn" data-cat="boxini" onclick="pickCategory('boxini')">BoxiniPvP</button>
-      <button class="cat-btn" data-cat="boom" onclick="pickCategory('boom')">BoomPvP</button>
-      <button class="cat-btn" data-cat="otros" style="grid-column: span 2" onclick="pickCategory('otros')">Otros</button>
+    <div class="cat-grid">
+      <button class="cat-btn">Kaboom+</button>
+      <button class="cat-btn">World Box</button>
+      <button class="cat-btn">Gens</button>
+      <button class="cat-btn">Earth</button>
+      <button class="cat-btn">Mario Box</button>
+      <button class="cat-btn">FNAF Box</button>
+      <button class="cat-btn">BoxiniPvP</button>
+      <button class="cat-btn">BoomPvP</button>
+      <button class="cat-btn" style="grid-column: span 2">Otros</button>
     </div>
   </div>
 </div>
 
 <script>
-  const catModal = document.getElementById('catModal');
-  const openCategoriesBtn = document.getElementById('openCategories');
-  const closeCatBtn = document.getElementById('closeCat');
-
-  openCategoriesBtn.addEventListener('click', ()=> {
-    catModal.style.display = 'flex';
-    catModal.classList.add('show');
-    catModal.setAttribute('aria-hidden','false');
-  });
-  closeCatBtn.addEventListener('click', ()=> {
-    catModal.style.display = 'none';
-    catModal.classList.remove('show');
-    catModal.setAttribute('aria-hidden','true');
-  });
-  catModal.addEventListener('click', (e)=> { if(e.target === catModal){ closeCatBtn.click(); } });
-
-  function pickCategory(cat){
-    closeCatBtn.click();
-    alert('Categoría seleccionada: ' + cat + '\n(En la versión final puedes enlazar a tu Tebex o filtrar productos).');
-  }
-
-  document.getElementById('joinDiscord').addEventListener('click', ()=> {
-    window.open('https://discord.gg/Rz5rj4YvZn','_blank');
-  });
+const catModal=document.getElementById('catModal');
+document.getElementById('openCategories').onclick=()=>{catModal.style.display='flex';catModal.classList.add('show');};
+document.getElementById('closeCat').onclick=()=>{catModal.style.display='none';catModal.classList.remove('show');};
+catModal.addEventListener('click',e=>{if(e.target===catModal)document.getElementById('closeCat').click();});
+document.getElementById('joinDiscord').onclick=()=>window.open('https://discord.gg/Rz5rj4YvZn','_blank');
 </script>
 </body>
 </html>
