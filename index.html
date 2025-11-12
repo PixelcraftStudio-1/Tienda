@@ -10,14 +10,15 @@
 
 <style>
   :root{
-    --bg: #000000;
-    --panel: #0b0b0b;
-    --muted: rgba(255,255,255,0.65);
-    --accent: #ffffff;
-    --border: rgba(255,255,255,0.12);
-    --btn-bg: #000000;      /* botones negros con borde blanco */
-    --btn-border: rgba(255,255,255,1);
+    --bg: #0a0a0a;
+    --panel: #111111;
+    --muted: rgba(230,230,230,0.7);
+    --accent: #fefefe;
+    --border: rgba(255,255,255,0.08);
+    --btn-bg: #0d0d0d;
+    --btn-border: #ffffff;
     --radius: 12px;
+    --glow: rgba(0,153,255,0.35);
   }
 
   *{box-sizing:border-box}
@@ -50,7 +51,12 @@
     margin-bottom:16px;
   }
   .logo {
-    width:48px;height:48px;border-radius:10px;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;
+    width:48px;height:48px;border-radius:10px;
+    background: linear-gradient(135deg, #0af, #08f);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:18px;
+    box-shadow:0 0 12px var(--glow);
   }
   .brand h1{font-size:16px;margin:0}
   .brand .tag{font-size:12px;color:var(--muted)}
@@ -67,9 +73,9 @@
     font-weight:700;
     text-align:left;
     cursor:pointer;
-    transition:transform .12s ease, background .12s;
+    transition:transform .12s ease, background .12s, box-shadow .2s;
   }
-  .select-cat:hover{ transform:translateY(-3px); background: rgba(255,255,255,0.02); }
+  .select-cat:hover{ transform:translateY(-3px); background: rgba(255,255,255,0.05); box-shadow:0 0 10px var(--glow); }
 
   .spacer{height:14px}
 
@@ -94,9 +100,9 @@
     border-radius:10px;
     cursor:pointer;
     font-weight:700;
-    transition: transform .12s ease, background .12s;
+    transition: transform .12s ease, background .12s, box-shadow .2s;
   }
-  .discord-btn:hover{ transform:translateY(-3px); background: rgba(255,255,255,0.02) }
+  .discord-btn:hover{ transform:translateY(-3px); background: rgba(255,255,255,0.05); box-shadow:0 0 10px var(--glow); }
 
   /* Right content */
   .content {
@@ -142,11 +148,11 @@
     border-radius:10px;
     font-weight:700;
     cursor:pointer;
-    transition: transform .12s ease, background .12s;
+    transition: transform .12s ease, background .12s, box-shadow .2s;
   }
-  .mini-btn:hover{ transform: translateY(-3px); background: rgba(255,255,255,0.02) }
+  .mini-btn:hover{ transform: translateY(-3px); background: rgba(255,255,255,0.05); box-shadow:0 0 10px var(--glow); }
 
-  /* Modal (categories) - minimalistic white/black */
+  /* Modal */
   .modal-backdrop{
     position:fixed;
     inset:0;
@@ -190,9 +196,9 @@
     color:var(--accent);
     font-weight:700;
     cursor:pointer;
-    transition: transform .12s, background .12s;
+    transition: transform .12s, background .12s, box-shadow .2s;
   }
-  .cat-btn:hover{ transform:translateY(-4px); background: rgba(255,255,255,0.02); color:var(--accent) }
+  .cat-btn:hover{ transform:translateY(-4px); background: rgba(255,255,255,0.05); box-shadow:0 0 10px var(--glow); }
 
   /* small screens */
   @media (max-width:900px){
@@ -206,7 +212,6 @@
 <body>
 
 <div class="page" role="main">
-  <!-- LEFT -->
   <aside class="sidebar" aria-label="Panel lateral">
     <div class="brand">
       <div class="logo">L</div>
@@ -228,27 +233,22 @@
     </div>
   </aside>
 
-  <!-- RIGHT -->
   <main class="content">
     <div class="welcome">
       <h2>Bienvenido a Logicraft Tienda</h2>
       <p>Compra rangos, paquetes y beneficios para nuestros servidores. Selecciona una categoría desde la izquierda para ver las opciones.</p>
     </div>
 
-    <!-- Policy text (user provided) -->
     <section class="policy" aria-labelledby="policyTitle">
       <h3 id="policyTitle" style="margin-top:0;margin-bottom:8px;color:var(--accent);font-size:15px">Política de Reembolso</h3>
-
       <p>
         Todos los pagos son finales y no son reembolsables. El intento de reembolsar un pago, tendrá como consecuencia una prohibición permanente e irreversible de nuestro servidor, y en las diversas tiendas existentes de servidores.
       </p>
-
       <p style="margin-top:10px;">
-        El tiempo de espera para recibir un paquete, puede tomar de 5-20 minutos. En caso de superar este tiempo de espera, abre un ticket en nuestro servidor de discord con pruebas de tu compra. Así te podremos ayudar a resolver tu problema.
+        El tiempo de espera para recibir un paquete, puede tomar de 5-20 minutos. En caso de superar este tiempo de espera, abre un ticket en nuestro servidor de discord con pruebas de tu compra.
       </p>
     </section>
 
-    <!-- Bottom buttons -->
     <div class="bottom-actions" role="navigation" aria-label="Enlaces legales">
       <button class="mini-btn" onclick="openTerms()">Términos y condiciones</button>
       <button class="mini-btn" onclick="openImprenta()">Imprenta</button>
@@ -283,45 +283,7 @@
   </div>
 </div>
 
-<!-- Simple placeholder modals for Terms/Imprenta/Privacy (lightweight) -->
-<div class="modal-backdrop" id="termsModal" aria-hidden="true" style="display:none;">
-  <div class="modal-panel" role="dialog" aria-modal="true">
-    <div class="modal-header">
-      <h3>Términos y condiciones</h3>
-      <button class="close-x" onclick="closeTerms()">✕</button>
-    </div>
-    <div style="color:var(--muted);font-size:14px;line-height:1.5">
-      <p>Al comprar aceptas los términos de Logicraft. Los pagos son finales. Entrega automática mediante Tebex.</p>
-    </div>
-  </div>
-</div>
-
-<div class="modal-backdrop" id="imprentaModal" aria-hidden="true" style="display:none;">
-  <div class="modal-panel" role="dialog" aria-modal="true">
-    <div class="modal-header">
-      <h3>Imprenta</h3>
-      <button class="close-x" onclick="closeImprenta()">✕</button>
-    </div>
-    <div style="color:var(--muted);font-size:14px;line-height:1.5">
-      <p>Logicraft Network — Información administrativa y de contacto.</p>
-    </div>
-  </div>
-</div>
-
-<div class="modal-backdrop" id="privacyModal" aria-hidden="true" style="display:none;">
-  <div class="modal-panel" role="dialog" aria-modal="true">
-    <div class="modal-header">
-      <h3>Política de Privacidad</h3>
-      <button class="close-x" onclick="closePrivacy()">✕</button>
-    </div>
-    <div style="color:var(--muted);font-size:14px;line-height:1.5">
-      <p>No compartimos tus datos personales con terceros. Toda la información se maneja mediante los sistemas seguros que uses (por ejemplo Tebex).</p>
-    </div>
-  </div>
-</div>
-
 <script>
-  /* open/close categories modal */
   const catModal = document.getElementById('catModal');
   const openCategoriesBtn = document.getElementById('openCategories');
   const closeCatBtn = document.getElementById('closeCat');
@@ -338,34 +300,13 @@
   });
   catModal.addEventListener('click', (e)=> { if(e.target === catModal){ closeCatBtn.click(); } });
 
-  /* pickCategory: placeholder (you can add real navigation) */
   function pickCategory(cat){
     closeCatBtn.click();
-    // placeholder feedback
     alert('Categoría seleccionada: ' + cat + '\n(En la versión final puedes enlazar a tu Tebex o filtrar productos).');
   }
 
-  /* Discord join */
   document.getElementById('joinDiscord').addEventListener('click', ()=> {
     window.open('https://discord.gg/Rz5rj4YvZn','_blank');
-  });
-
-  /* Terms/Imprenta/Privacy modal handlers */
-  function openTerms(){ document.getElementById('termsModal').style.display='flex'; document.getElementById('termsModal').classList.add('show'); }
-  function closeTerms(){ document.getElementById('termsModal').style.display='none'; document.getElementById('termsModal').classList.remove('show'); }
-  function openImprenta(){ document.getElementById('imprentaModal').style.display='flex'; document.getElementById('imprentaModal').classList.add('show'); }
-  function closeImprenta(){ document.getElementById('imprentaModal').style.display='none'; document.getElementById('imprentaModal').classList.remove('show'); }
-  function openPrivacy(){ document.getElementById('privacyModal').style.display='flex'; document.getElementById('privacyModal').classList.add('show'); }
-  function closePrivacy(){ document.getElementById('privacyModal').style.display='none'; document.getElementById('privacyModal').classList.remove('show'); }
-
-  /* accessibility: close on Esc */
-  window.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape'){
-      closeCatBtn.click();
-      closeTerms();
-      closeImprenta();
-      closePrivacy();
-    }
   });
 </script>
 </body>
