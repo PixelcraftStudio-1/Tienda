@@ -1,111 +1,333 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Logicraft Tienda</title>
+
+<!-- Tipografía -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-  :root {
+  :root{
     --bg: #000000;
     --panel: #0b0b0b;
+    --muted: rgba(255,255,255,0.65);
     --accent: #ffffff;
-    --blue: #00bfff;
+    --border: rgba(255,255,255,0.12);
+    --btn-bg: #000000;
+    --btn-border: #00aaff; /* 🔹 bordes azules */
+    --radius: 12px;
   }
 
-  * { box-sizing: border-box; }
-  body {
-    background: var(--bg);
-    color: var(--accent);
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    justify-content: center;
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--accent);font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  a{color:inherit;text-decoration:none}
+
+  .page {
+    max-width:1200px;
+    margin:28px auto;
+    padding:20px;
+    display:grid;
+    grid-template-columns:300px 1fr;
+    gap:20px;
   }
 
-  h2 {
-    margin-bottom: 20px;
-    font-weight: 700;
-    font-size: 24px;
-    color: var(--accent);
+  /* Sidebar */
+  .sidebar {
+    background: linear-gradient(180deg,var(--panel), #0e0e0e);
+    border-radius: var(--radius);
+    padding:18px;
+    border:1px solid var(--border);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
   }
 
+  .brand {
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin-bottom:16px;
+  }
+  .logo {
+    width:48px;height:48px;border-radius:10px;background:#00aaff; /* 🔹 logo azul */
+    color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;
+  }
+  .brand h1{font-size:16px;margin:0}
+  .brand .tag{font-size:12px;color:var(--muted)}
+
+  .select-cat {
+    display:block;
+    width:100%;
+    padding:12px 14px;
+    border-radius:10px;
+    background:transparent;
+    color:var(--accent);
+    border:2px solid var(--btn-border);
+    font-weight:700;
+    text-align:left;
+    cursor:pointer;
+    transition:transform .12s ease, background .12s;
+  }
+  .select-cat:hover{ transform:translateY(-3px); background: rgba(0,170,255,0.08); }
+
+  .discord-box{
+    margin-top:8px;
+    background:transparent;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    align-items:center;
+  }
+  .discord-box p{ margin:0; color:var(--muted); font-size:14px; text-align:center }
+  .discord-btn {
+    width:100%;
+    background: var(--btn-bg);
+    color:var(--accent);
+    border:2px solid var(--btn-border);
+    padding:10px 12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
+    transition: transform .12s ease, background .12s;
+  }
+  .discord-btn:hover{ transform:translateY(-3px); background: rgba(0,170,255,0.08) }
+
+  .content {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    border-radius: var(--radius);
+    padding:22px;
+    border:1px solid var(--border);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+
+  .welcome h2{margin:0;font-size:20px}
+  .welcome p{color:var(--muted);font-size:14px;margin:6px 0 0}
+
+  /* 🔹 Top Compras */
   .top-compras-container {
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-    justify-content: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:40px;
+    flex-wrap:wrap;
+    margin-top:20px;
   }
-
   .top-box {
     background: var(--panel);
-    width: 240px;
-    height: 260px;
-    border: 3px solid var(--blue);
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    width:240px;
+    height:260px;
+    border:3px solid var(--btn-border);
+    border-radius:16px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 0 20px rgba(0,170,255,0.4);
+    transition:all 0.3s ease;
+    position:relative;
+    overflow:hidden;
   }
-
   .top-box::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 16px;
-    box-shadow: 0 0 25px 5px rgba(0,191,255,0.3);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:16px;
+    box-shadow:0 0 25px 5px rgba(0,170,255,0.3);
+    opacity:0;
+    transition:opacity 0.3s ease;
   }
-
   .top-box:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 0 40px rgba(0,191,255,0.8);
+    transform:translateY(-6px);
+    box-shadow:0 0 40px rgba(0,170,255,0.8);
   }
-
   .top-box:hover::before {
-    opacity: 1;
+    opacity:1;
   }
-
   .top-box img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    border-radius: 10px;
-    margin-bottom: 12px;
-    filter: drop-shadow(0 0 10px rgba(0,191,255,0.6));
+    width:100px;
+    height:100px;
+    object-fit:contain;
+    border-radius:10px;
+    margin-bottom:12px;
+    filter:drop-shadow(0 0 10px rgba(0,170,255,0.6));
+  }
+  .top-box span {
+    font-weight:700;
+    color:var(--accent);
+    font-size:16px;
+    text-shadow:0 0 6px rgba(0,170,255,0.8);
   }
 
-  .top-box span {
-    font-weight: 700;
+  .policy {
+    margin-top:6px;
+    color: var(--muted);
+    line-height:1.6;
+    font-size:14px;
+    padding:12px;
+    border-radius:10px;
+  }
+  .policy strong{color:var(--accent)}
+
+  .bottom-actions{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    align-items:center;
+    margin-top:6px;
+  }
+  .mini-btn{
+    background: var(--btn-bg);
     color: var(--accent);
-    font-size: 16px;
-    text-shadow: 0 0 6px rgba(0,191,255,0.8);
+    border:2px solid var(--btn-border);
+    padding:10px 14px;
+    border-radius:10px;
+    font-weight:700;
+    cursor:pointer;
+    transition: transform .12s ease, background .12s;
+  }
+  .mini-btn:hover{ transform: translateY(-3px); background: rgba(0,170,255,0.08) }
+
+  .modal-backdrop{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background: rgba(0,0,0,0.7);
+    z-index:999;
+  }
+  .modal-panel{
+    width:640px;
+    max-width:94%;
+    background: #0b0b0b;
+    border-radius:14px;
+    padding:20px;
+    border:1px solid var(--border);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    transform: translateY(8px);
+    opacity:0;
+    transition: transform .18s ease, opacity .18s ease;
+  }
+  .modal-backdrop.show .modal-panel{ transform: translateY(0); opacity:1 }
+
+  .close-x{
+    background:#000;border:2px solid var(--btn-border);color:var(--accent);padding:6px 10px;border-radius:8px;cursor:pointer;font-weight:700;
+  }
+
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-top:8px;
+  }
+  .cat-btn{
+    padding:12px 14px;
+    border-radius:10px;
+    background:transparent;
+    border:2px solid var(--btn-border);
+    color:var(--accent);
+    font-weight:700;
+    cursor:pointer;
+    transition: transform .12s, background .12s;
+  }
+  .cat-btn:hover{ transform:translateY(-4px); background: rgba(0,170,255,0.08); color:var(--accent) }
+
+  @media (max-width:900px){
+    .page{grid-template-columns:1fr; padding:14px}
+    .sidebar{order:2}
+    .content{order:1}
   }
 </style>
 </head>
 <body>
 
-<h2>🏆 Top Compras</h2>
-<div class="top-compras-container">
-  <div class="top-box">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="Logo 1">
-    <span>Top Compras</span>
-  </div>
-  <div class="top-box">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="Logo 2">
-    <span>Top Compras</span>
+<div class="page">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">L</div>
+      <div>
+        <h1>Logicraft Tienda</h1>
+        <div class="tag">Rangos • Paquetes • Cosmeticos</div>
+      </div>
+    </div>
+
+    <button class="select-cat" id="openCategories">Selecciona una categoría ▾</button>
+
+    <div class="discord-box">
+      <p>¿Necesitas ayuda? Únete a nuestro servidor de Discord.</p>
+      <button class="discord-btn" id="joinDiscord">Unirse al servidor</button>
+    </div>
+  </aside>
+
+  <main class="content">
+    <div class="welcome">
+      <h2>Bienvenido a Logicraft Tienda</h2>
+      <p>Compra rangos, paquetes y beneficios para nuestros servidores.</p>
+    </div>
+
+    <!-- 🔹 Sección Top Compras -->
+    <section class="top-compras-container">
+      <div class="top-box">
+        <img src="https://via.placeholder.com/100x100?text=Logo" alt="Top 1">
+        <span>Top Compras #1</span>
+      </div>
+      <div class="top-box">
+        <img src="https://via.placeholder.com/100x100?text=Logo" alt="Top 2">
+        <span>Top Compras #2</span>
+      </div>
+    </section>
+
+    <section class="policy">
+      <h3 style="color:var(--accent);font-size:15px">Política de Reembolso</h3>
+      <p>Todos los pagos son finales y no son reembolsables. El intento de reembolsar un pago resultará en una prohibición permanente.</p>
+      <p>El tiempo de espera para recibir un paquete puede tomar de 5-20 minutos. Si pasa ese tiempo, abre un ticket en nuestro Discord.</p>
+    </section>
+
+    <div class="bottom-actions">
+      <button class="mini-btn" onclick="openTerms()">Términos</button>
+      <button class="mini-btn" onclick="openImprenta()">Imprenta</button>
+      <button class="mini-btn" onclick="openPrivacy()">Privacidad</button>
+    </div>
+  </main>
+</div>
+
+<footer style="text-align:center;margin-top:22px;color:var(--muted);font-size:13px;padding-bottom:26px;">
+  © 2025 Logicraft Network — No afiliado a Mojang AB
+</footer>
+
+<!-- Modal Categorías -->
+<div class="modal-backdrop" id="catModal">
+  <div class="modal-panel">
+    <div class="modal-header">
+      <h3>Selecciona una categoría</h3>
+      <button class="close-x" id="closeCat">✕</button>
+    </div>
+    <div class="cat-grid">
+      <button class="cat-btn">Kaboom+</button>
+      <button class="cat-btn">World Box</button>
+      <button class="cat-btn">Gens</button>
+      <button class="cat-btn">Earth</button>
+      <button class="cat-btn">Mario Box</button>
+      <button class="cat-btn">FNAF Box</button>
+      <button class="cat-btn">BoxiniPvP</button>
+      <button class="cat-btn">BoomPvP</button>
+      <button class="cat-btn" style="grid-column: span 2">Otros</button>
+    </div>
   </div>
 </div>
 
+<script>
+const catModal=document.getElementById('catModal');
+document.getElementById('openCategories').onclick=()=>{catModal.style.display='flex';catModal.classList.add('show');};
+document.getElementById('closeCat').onclick=()=>{catModal.style.display='none';catModal.classList.remove('show');};
+catModal.addEventListener('click',e=>{if(e.target===catModal)document.getElementById('closeCat').click();});
+document.getElementById('joinDiscord').onclick=()=>window.open('https://discord.gg/Rz5rj4YvZn','_blank');
+</script>
 </body>
 </html>
