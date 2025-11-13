@@ -1,243 +1,331 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Logicraft Tienda</title>
+
+<!-- Tipografía -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-body {
-  background-color: #000;
-  color: white;
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-header {
-  border-bottom: 2px solid #00aaff;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-header img {
-  height: 50px;
-}
-nav a {
-  margin: 0 15px;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  border: 2px solid #00aaff;
-  padding: 8px 16px;
-  border-radius: 12px;
-  transition: 0.3s;
-}
-nav a:hover {
-  background-color: #00aaff;
-  color: black;
-  box-shadow: 0 0 15px #00aaff;
-}
-button.discord {
-  background-color: transparent;
-  color: #00aaff;
-  border: 2px solid #00aaff;
-  padding: 8px 16px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-}
-button.discord:hover {
-  background-color: #00aaff;
-  color: black;
-  box-shadow: 0 0 15px #00aaff;
-}
+  :root{
+    --bg: #000000;
+    --panel: #0b0b0b;
+    --muted: rgba(255,255,255,0.65);
+    --accent: #ffffff;
+    --border: rgba(255,255,255,0.12);
+    --btn-bg: #000000;
+    --btn-border: #00aaff;
+    --radius: 12px;
+  }
 
-/* Cuadros de Top Compras */
-.top-container {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin: 100px auto 60px;
-}
-.top-box {
-  width: 250px;
-  height: 250px;
-  background: #000;
-  border: 3px solid #00aaff;
-  border-radius: 20px;
-  box-shadow: 0 0 15px #00aaff;
-  transition: 0.3s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.top-box img {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 10px;
-}
-.top-box:hover {
-  box-shadow: 0 0 30px #00aaff;
-}
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--accent);font-family:'Poppins',system-ui;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none}
 
-/* Sección de categorías e información */
-section {
-  margin: 50px 0;
-}
-h2 {
-  color: #00aaff;
-}
-.info {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #aaa;
-  border-top: 1px solid #00aaff;
-  padding-top: 15px;
-}
+  .page {
+    max-width:1200px;
+    margin:28px auto;
+    padding:20px;
+    display:grid;
+    grid-template-columns:300px 1fr;
+    gap:20px;
+  }
 
-/* Footer */
-footer {
-  border-top: 2px solid #00aaff;
-  padding: 20px;
-  margin-top: 40px;
-}
-footer a {
-  margin: 0 10px;
-  color: white;
-  text-decoration: none;
-  border: 2px solid #00aaff;
-  padding: 6px 14px;
-  border-radius: 10px;
-  transition: 0.3s;
-}
-footer a:hover {
-  background-color: #00aaff;
-  color: black;
-  box-shadow: 0 0 10px #00aaff;
-}
-small {
-  display: block;
-  margin-top: 10px;
-  color: #777;
-}
+  .sidebar {
+    background: linear-gradient(180deg,var(--panel), #0e0e0e);
+    border-radius: var(--radius);
+    padding:18px;
+    border:1px solid var(--border);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  }
 
-/* Modales */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-}
-.modal-content {
-  background: #000;
-  border: 2px solid #00aaff;
-  border-radius: 20px;
-  width: 60%;
-  margin: 10% auto;
-  padding: 30px;
-  box-shadow: 0 0 25px #00aaff;
-  color: white;
-  position: relative;
-}
-.close {
-  position: absolute;
-  right: 20px;
-  top: 10px;
-  font-size: 25px;
-  cursor: pointer;
-  color: #00aaff;
-}
-.close:hover {
-  color: white;
-}
+  .brand {
+    display:flex;
+    gap:12px;
+    align-items:center;
+    margin-bottom:16px;
+  }
+  .logo {
+    width:48px;height:48px;border-radius:10px;background:#00aaff;
+    color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;
+  }
+  .brand h1{font-size:16px;margin:0}
+  .brand .tag{font-size:12px;color:var(--muted)}
+
+  .select-cat {
+    display:block;
+    width:100%;
+    padding:12px 14px;
+    border-radius:10px;
+    background:transparent;
+    color:var(--accent);
+    border:2px solid var(--btn-border);
+    font-weight:700;
+    text-align:left;
+    cursor:pointer;
+    transition:transform .12s ease, background .12s;
+  }
+  .select-cat:hover{ transform:translateY(-3px); background: rgba(0,170,255,0.08); }
+
+  .info-box {
+    margin-top:16px;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+  }
+  .info-box h4 {
+    margin:0 0 6px 0;
+    color:var(--accent);
+    font-size:14px;
+  }
+
+  .discord-box{
+    margin-top:12px;
+    background:transparent;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    align-items:center;
+  }
+  .discord-box p{ margin:0; color:var(--muted); font-size:14px; text-align:center }
+  .discord-btn {
+    width:100%;
+    background: var(--btn-bg);
+    color:var(--accent);
+    border:2px solid var(--btn-border);
+    padding:10px 12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
+    transition: transform .12s ease, background .12s;
+  }
+  .discord-btn:hover{ transform:translateY(-3px); background: rgba(0,170,255,0.08) }
+
+  .content {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    border-radius: var(--radius);
+    padding:22px;
+    border:1px solid var(--border);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+
+  .welcome h2{margin:0;font-size:20px}
+  .welcome p{color:var(--muted);font-size:14px;margin:6px 0 0}
+
+  .top-compras {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 14px;
+  }
+  .top-box {
+    border: 2px solid var(--btn-border);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+    background: rgba(0,170,255,0.05);
+    font-weight: 600;
+  }
+
+  .policy {
+    margin-top:6px;
+    color: var(--muted);
+    line-height:1.6;
+    font-size:14px;
+    padding:12px;
+    border-radius:10px;
+  }
+  .policy strong{color:var(--accent)}
+
+  .bottom-actions{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    align-items:center;
+    margin-top:6px;
+  }
+  .mini-btn{
+    background: var(--btn-bg);
+    color: var(--accent);
+    border:2px solid var(--btn-border);
+    padding:10px 14px;
+    border-radius:10px;
+    font-weight:700;
+    cursor:pointer;
+    transition: transform .12s ease, background .12s;
+  }
+  .mini-btn:hover{ transform: translateY(-3px); background: rgba(0,170,255,0.08) }
+
+  .modal-backdrop{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background: rgba(0,0,0,0.7);
+    z-index:999;
+  }
+  .modal-panel{
+    width:640px;
+    max-width:94%;
+    background: #0b0b0b;
+    border-radius:14px;
+    padding:20px;
+    border:1px solid var(--border);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    transform: translateY(8px);
+    opacity:0;
+    transition: transform .18s ease, opacity .18s ease;
+  }
+  .modal-backdrop.show .modal-panel{ transform: translateY(0); opacity:1 }
+
+  .close-x{
+    background:#000;border:2px solid var(--btn-border);color:var(--accent);padding:6px 10px;border-radius:8px;cursor:pointer;font-weight:700;
+  }
+
+  @media (max-width:900px){
+    .page{grid-template-columns:1fr; padding:14px}
+    .sidebar{order:2}
+    .content{order:1}
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <img src="logo.png" alt="Logicraft Logo">
-  <nav>
-    <a href="#">Inicio</a>
-    <a href="#">Categorías</a>
-    <button class="discord" onclick="window.open('https://discord.gg/Rz5rj4YvZn', '_blank')">Unirse al Discord</button>
-  </nav>
-</header>
-
-<section>
-  <h2>Top Compras</h2>
-  <div class="top-container">
-    <div class="top-box">
-      <img src="logo.png" alt="Logo">
-      <span>Top Compras</span>
+<div class="page">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">L</div>
+      <div>
+        <h1>Logicraft Tienda</h1>
+        <div class="tag">Rangos • Paquetes • Cosmeticos</div>
+      </div>
     </div>
-    <div class="top-box">
-      <img src="logo.png" alt="Logo">
-      <span>Top Compras</span>
+
+    <button class="select-cat" id="openCategories">Selecciona una categoría ▾</button>
+
+    <div class="info-box">
+      <h4>INFORMACIÓN</h4>
+      Logicraft de ninguna manera está afiliado con Mojang, AB. Tampoco debe ser considerada una empresa avalada por Mojang, AB.<br>
+      Minecraft - © Mojang AB 2009-2024
     </div>
-  </div>
 
-  <h2>Categorías</h2>
-  <div class="info">
-    <p><strong>INFORMACIÓN</strong><br>
-    Logicraft de ninguna manera está afiliado con Mojang, AB. Tampoco debe ser considerada una empresa avalada por Mojang, AB.<br>
-    Minecraft - © Mojang AB 2009-2024</p>
-  </div>
-</section>
+    <div class="discord-box">
+      <p>¿Necesitas ayuda? Únete a nuestro servidor de Discord.</p>
+      <button class="discord-btn" id="joinDiscord">Unirse al servidor</button>
+    </div>
+  </aside>
 
-<footer>
-  <a href="#" onclick="openModal('terminosModal')">Términos</a>
-  <a href="#" onclick="openModal('imprentaModal')">Imprenta</a>
-  <a href="#" onclick="openModal('privacidadModal')">Privacidad</a>
-  <small>Todos los pagos son finales • Política de Reembolso</small>
+  <main class="content">
+    <div class="welcome">
+      <h2>Bienvenido a Logicraft Tienda</h2>
+      <p>Compra rangos, paquetes y beneficios para nuestros servidores.</p>
+    </div>
+
+    <div class="top-compras">
+      <div class="top-box">Top Compras #1</div>
+      <div class="top-box">Top Compras #2</div>
+    </div>
+
+    <section class="policy">
+      <h3 style="color:var(--accent);font-size:15px">Política de Reembolso</h3>
+      <p>Todos los pagos son finales y no son reembolsables. El intento de reembolsar un pago resultará en una prohibición permanente.</p>
+      <p>El tiempo de espera para recibir un paquete puede tomar de 5-20 minutos. Si pasa ese tiempo, abre un ticket en nuestro Discord.</p>
+    </section>
+
+    <div class="bottom-actions">
+      <button class="mini-btn" onclick="openModal('termsModal')">Términos</button>
+      <button class="mini-btn" onclick="openModal('imprentaModal')">Imprenta</button>
+      <button class="mini-btn" onclick="openModal('privacyModal')">Privacidad</button>
+    </div>
+  </main>
+</div>
+
+<footer style="text-align:center;margin-top:22px;color:var(--muted);font-size:13px;padding-bottom:26px;">
+  © 2025 Logicraft Network — No afiliado a Mojang AB
 </footer>
 
-<!-- Modales -->
-<div id="terminosModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('terminosModal')">&times;</span>
-    <h2>Términos del Servicio</h2>
-    <p>Al utilizar Logicraft aceptas los términos de uso. Todas las compras son finales y no se reembolsarán bajo ninguna circunstancia salvo excepciones legales.</p>
+<!-- Modal Categorías -->
+<div class="modal-backdrop" id="catModal">
+  <div class="modal-panel">
+    <div class="modal-header" style="display:flex;justify-content:space-between;align-items:center;">
+      <h3>Selecciona una categoría</h3>
+      <button class="close-x" id="closeCat">✕</button>
+    </div>
+    <div class="cat-grid">
+      <button class="mini-btn">Kaboom+</button>
+      <button class="mini-btn">World Box</button>
+      <button class="mini-btn">Gens</button>
+      <button class="mini-btn">Earth</button>
+      <button class="mini-btn">Mario Box</button>
+      <button class="mini-btn">FNAF Box</button>
+      <button class="mini-btn">BoxiniPvP</button>
+      <button class="mini-btn">BoomPvP</button>
+      <button class="mini-btn" style="grid-column: span 2">Otros</button>
+    </div>
   </div>
 </div>
 
-<div id="imprentaModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('imprentaModal')">&times;</span>
-    <h2>Imprenta</h2>
-    <p>Logicraft es una marca independiente no afiliada con Mojang AB.<br>
-    Correo de contacto: soporte@logicraft.net</p>
+<!-- Modal Términos -->
+<div class="modal-backdrop" id="termsModal">
+  <div class="modal-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3>Términos del Servicio</h3>
+      <button class="close-x" onclick="closeModal('termsModal')">✕</button>
+    </div>
+    <p>Al realizar una compra en Logicraft, aceptas que todos los pagos son finales y no reembolsables. Nos reservamos el derecho de modificar o eliminar productos sin previo aviso.</p>
   </div>
 </div>
 
-<div id="privacidadModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('privacidadModal')">&times;</span>
-    <h2>Política de Privacidad</h2>
-    <p>Logicraft protege tu información personal. No compartimos tus datos con terceros salvo obligación legal.</p>
+<!-- Modal Imprenta -->
+<div class="modal-backdrop" id="imprentaModal">
+  <div class="modal-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3>Imprenta</h3>
+      <button class="close-x" onclick="closeModal('imprentaModal')">✕</button>
+    </div>
+    <p>Logicraft Network<br>Correo: contacto@logicraft.net<br>Discord: <a href="https://discord.gg/Rz5rj4YvZn" target="_blank">Únete aquí</a></p>
+  </div>
+</div>
+
+<!-- Modal Privacidad -->
+<div class="modal-backdrop" id="privacyModal">
+  <div class="modal-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3>Política de Privacidad</h3>
+      <button class="close-x" onclick="closeModal('privacyModal')">✕</button>
+    </div>
+    <p>Logicraft respeta tu privacidad. No compartimos información personal con terceros. Los datos de pago son procesados de forma segura a través de nuestros socios autorizados.</p>
   </div>
 </div>
 
 <script>
-function openModal(id) {
-  document.getElementById(id).style.display = "block";
-}
-function closeModal(id) {
-  document.getElementById(id).style.display = "none";
-}
-window.onclick = function(e) {
-  const modals = document.querySelectorAll('.modal');
-  modals.forEach(m => {
-    if (e.target === m) m.style.display = "none";
-  });
-};
-</script>
+const catModal=document.getElementById('catModal');
+document.getElementById('openCategories').onclick=()=>{catModal.style.display='flex';catModal.classList.add('show');};
+document.getElementById('closeCat').onclick=()=>{catModal.style.display='none';catModal.classList.remove('show');};
+catModal.addEventListener('click',e=>{if(e.target===catModal)document.getElementById('closeCat').click();});
+document.getElementById('joinDiscord').onclick=()=>window.open('https://discord.gg/Rz5rj4YvZn','_blank');
 
+function openModal(id){
+  const modal=document.getElementById(id);
+  modal.style.display='flex';
+  setTimeout(()=>modal.classList.add('show'),10);
+}
+function closeModal(id){
+  const modal=document.getElementById(id);
+  modal.classList.remove('show');
+  setTimeout(()=>modal.style.display='none',200);
+}
+</script>
 </body>
 </html>
